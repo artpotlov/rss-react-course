@@ -1,0 +1,40 @@
+.card {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  border: 1px solid lavender;
+  border-radius: 1rem;
+}
+
+.image {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.title {
+  margin-top: 2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  height: 3rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.category {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: gray;
+}
+
+.price {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  line-height: 1.5;
+}

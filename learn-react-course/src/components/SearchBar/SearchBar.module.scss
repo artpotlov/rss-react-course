@@ -1,0 +1,30 @@
+.form {
+  display: flex;
+  gap: 1rem;
+}
+
+.searchInput {
+  padding: 0 1rem;
+  border: 1px solid lightsteelblue;
+  height: 3rem;
+  border-radius: 0.25rem;
+  outline: 0;
+
+  &:focus {
+    border: 1px solid steelblue;
+  }
+}
+
+.submit {
+  background-color: #fff;
+  border: 1px solid steelblue;
+  border-radius: 0.25rem;
+  padding: 0 1rem;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    background-color: steelblue;
+    color: white;
+  }
+}
