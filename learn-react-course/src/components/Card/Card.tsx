@@ -15,7 +15,7 @@ class Card extends Component<TProps> {
 
   render() {
     return (
-      <div className={styles.card}>
+      <div data-testid="card" className={styles.card}>
         <div>
           <img src={this.props.image} alt={this.props.title} className={styles.image} />
           <span className={styles.title}>{this.props.title}</span>

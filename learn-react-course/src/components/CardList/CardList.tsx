@@ -15,7 +15,7 @@ class CardList extends Component<TProps> {
   render() {
     const data = this.props.goods;
     return (
-      <div className={styles.cards}>
+      <div data-testid="card-list" className={styles.cards}>
         {data.map(({ id, title, price, category, image }) => (
           <Card key={id} title={title} price={price} category={category} image={image} />
         ))}

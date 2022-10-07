@@ -7,7 +7,7 @@ import { CardList } from '../../components/CardList';
 class HomePage extends Component {
   render() {
     return (
-      <section>
+      <section data-testid="home-page">
         <header className={styles.header}>
           <h1>Home Page</h1>
           <SearchBar />

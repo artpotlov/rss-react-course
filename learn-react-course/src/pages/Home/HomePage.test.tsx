@@ -3,8 +3,8 @@ import { render, screen } from '@testing-library/react';
 import { HomePage } from './index';
 
 describe('Home page tests:', () => {
-  it('page mounted', () => {
+  it('the page mounted', () => {
     render(<HomePage />);
-    expect(screen.getByText(/^Home page/i)).toBeInTheDocument();
+    expect(screen.getByTestId('home-page')).toBeInTheDocument();
   });
 });

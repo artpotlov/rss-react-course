@@ -1,30 +1,12 @@
 import React from 'react';
-import { createMemoryRouter, RouteObject, RouterProvider } from 'react-router-dom';
-import App from './App';
-import { HomePage } from './pages/Home';
-import { AboutUsPage } from './pages/AboutUs';
+import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-
-const routes: RouteObject[] = [
-  {
-    path: '/',
-    element: <App />,
-    children: [
-      {
-        index: true,
-        element: <HomePage />,
-      },
-      {
-        path: '/about-us',
-        element: <AboutUsPage />,
-      },
-    ],
-  },
-];
+import { routes } from './router/routes';
+import { routerConfig } from './router/router';
 
 const renderPage = (pageNum: number) => {
-  const router = createMemoryRouter(routes, {
-    initialEntries: ['/', '/about-us'],
+  const router = createMemoryRouter(routerConfig, {
+    initialEntries: [routes.main, routes.aboutUs],
     initialIndex: pageNum,
   });
 
@@ -34,11 +16,11 @@ const renderPage = (pageNum: number) => {
 describe('Router tests:', () => {
   it('home page rendered', () => {
     renderPage(0);
-    expect(screen.getByRole('heading')).toHaveTextContent(/^Home page/i);
+    expect(screen.getByTestId('home-page')).toBeInTheDocument();
   });
 
   it('about us page rendered', () => {
     renderPage(1);
-    expect(screen.getByRole('heading')).toHaveTextContent(/^About us/i);
+    expect(screen.getByTestId('about-us-page')).toBeInTheDocument();
   });
 });

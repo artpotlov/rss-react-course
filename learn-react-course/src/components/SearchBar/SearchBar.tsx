@@ -30,6 +30,7 @@ class SearchBar extends Component<TProps, TState> {
     return (
       <form className={styles.form}>
         <input
+          data-testid="search-bar"
           type="search"
           placeholder="Search by..."
           className={styles.searchInput}

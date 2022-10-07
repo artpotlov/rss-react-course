@@ -12,15 +12,15 @@ describe('Header component tests:', () => {
     );
   });
 
-  it('header mount', () => {
+  it('header mounted', () => {
+    expect(screen.getByTestId('header')).toBeInTheDocument();
+  });
+
+  it('header has home text link', () => {
     expect(screen.getByText(/Home/i)).toBeInTheDocument();
   });
 
-  it('it has home text link', () => {
-    expect(screen.getByText(/Home/i)).toBeInTheDocument();
-  });
-
-  it('it has about us text link', () => {
+  it('header has about us text link', () => {
     expect(screen.getByText(/About us/i)).toBeInTheDocument();
   });
 });

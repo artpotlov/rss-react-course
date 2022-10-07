@@ -27,7 +27,21 @@ describe('Card list tests:', () => {
     render(<CardList goods={fakeGoods} />);
   });
 
-  it('cards mounted', () => {
-    expect(screen.getAllByText(/Test title/i)).toHaveLength(2);
+  it('card list mounted', () => {
+    expect(screen.getByTestId('card-list')).toBeInTheDocument();
+  });
+
+  it('amount of cards in card list have length equal 2', () => {
+    expect(screen.getAllByTestId('card')).toHaveLength(2);
+  });
+
+  it('first card has title "test title 1"', () => {
+    const firstCard = screen.getAllByTestId('card')[0].querySelector('.title');
+    expect(firstCard).toHaveTextContent(/Test title 1/i);
+  });
+
+  it('second card has title "test title 2"', () => {
+    const secondCard = screen.getAllByTestId('card')[1].querySelector('.title');
+    expect(secondCard).toHaveTextContent(/Test title 2/i);
   });
 });

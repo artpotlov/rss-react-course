@@ -4,12 +4,12 @@ import { ErrorPage } from './index';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('Error page tests:', () => {
-  it('page mounted', () => {
+  it('the page mounted', () => {
     render(
       <MemoryRouter>
         <ErrorPage />
       </MemoryRouter>
     );
-    expect(screen.getByText(/^Page not found/i)).toBeInTheDocument();
+    expect(screen.getByTestId('error-page')).toBeInTheDocument();
   });
 });

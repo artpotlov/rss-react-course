@@ -3,8 +3,8 @@ import { render, screen } from '@testing-library/react';
 import { AboutUsPage } from './index';
 
 describe('About us page tests:', () => {
-  it('page mounted ', () => {
+  it('the page mounted ', () => {
     render(<AboutUsPage />);
-    expect(screen.getByText(/^About Us/i)).toBeInTheDocument();
+    expect(screen.getByTestId('about-us-page')).toBeInTheDocument();
   });
 });

@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <>
         <Header />
-        <main>
+        <main data-testid="app">
           <Outlet />
         </main>
       </>

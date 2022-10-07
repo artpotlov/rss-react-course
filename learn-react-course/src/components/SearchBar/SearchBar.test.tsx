@@ -24,8 +24,8 @@ describe('Search bar component tests:', () => {
     render(<SearchBar />);
   });
 
-  it('search bar mount', () => {
-    expect(screen.getByPlaceholderText(/Search by.../i)).toBeInTheDocument();
+  it('search bar mounted', () => {
+    expect(screen.getByTestId('search-bar')).toBeInTheDocument();
   });
 
   it('getItem method in local storage was called', () => {

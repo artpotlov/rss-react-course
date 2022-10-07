@@ -19,23 +19,23 @@ describe('Card tests:', () => {
     );
   });
 
-  it('card mount', () => {
+  it('card mounted', () => {
+    expect(screen.getByTestId('card')).toBeInTheDocument();
+  });
+
+  it('card has title "test card title"', () => {
     expect(screen.getByText(/Test card title/i)).toBeInTheDocument();
   });
 
-  it('it has title', () => {
-    expect(screen.getByText(/Test card title/i)).toBeInTheDocument();
-  });
-
-  it('it has category', () => {
+  it('card has category "test category"', () => {
     expect(screen.getByText(/Test category/i)).toBeInTheDocument();
   });
 
-  it('it has price', () => {
+  it('card has price "123"', () => {
     expect(screen.getByText(/123/i)).toBeInTheDocument();
   });
 
-  it('img has correct alt', () => {
+  it('image tag in card has correct alt text and equal "test card title"', () => {
     expect(screen.getByAltText(/Test card title/i)).toBeInTheDocument();
   });
 });

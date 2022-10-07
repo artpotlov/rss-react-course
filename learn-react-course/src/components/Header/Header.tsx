@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './Header.module.scss';
 import { NavLink } from 'react-router-dom';
+import { routes } from '../../router/routes';
 
 class Header extends Component {
   isActiveLink(isActive: boolean) {
@@ -9,13 +10,13 @@ class Header extends Component {
 
   render() {
     return (
-      <header className={styles.header}>
+      <header data-testid="header" className={styles.header}>
         <div className={styles.wrapper}>
           <nav className={styles.navLinks}>
-            <NavLink to="/" className={({ isActive }) => this.isActiveLink(isActive)} end>
+            <NavLink to={routes.main} className={({ isActive }) => this.isActiveLink(isActive)} end>
               Home
             </NavLink>
-            <NavLink to="/about-us" className={({ isActive }) => this.isActiveLink(isActive)}>
+            <NavLink to={routes.aboutUs} className={({ isActive }) => this.isActiveLink(isActive)}>
               About Us
             </NavLink>
           </nav>

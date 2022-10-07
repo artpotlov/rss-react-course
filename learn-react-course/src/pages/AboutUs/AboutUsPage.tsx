@@ -4,7 +4,7 @@ class AboutUsPage extends Component {
   render() {
     return (
       <>
-        <h1>About Us</h1>
+        <h1 data-testid="about-us-page">About Us</h1>
         <p>This is the about us page</p>
       </>
     );
