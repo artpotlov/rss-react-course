@@ -8,22 +8,19 @@ type TState = {
 };
 
 class SearchBar extends Component<TProps, TState> {
-  state = {
-    value: '',
-  };
-
   constructor(props: TProps) {
     super(props);
     const data = getSearchData();
-    if (data) this.state.value = data;
+    this.setState({ value: data || '' });
   }
 
   componentWillUnmount() {
     saveSearchData(this.state.value);
   }
 
-  onChange(target: HTMLInputElement) {
-    this.setState({ value: target.value });
+  onChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!e) return;
+    this.setState({ value: e.target.value });
   }
 
   render() {
@@ -35,7 +32,7 @@ class SearchBar extends Component<TProps, TState> {
           placeholder="Search by..."
           className={styles.searchInput}
           value={this.state.value}
-          onChange={({ target }) => this.onChange(target)}
+          onChange={this.onChange}
         />
         <button className={styles.submit}>Search</button>
       </form>
