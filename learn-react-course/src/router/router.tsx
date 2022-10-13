@@ -1,10 +1,11 @@
 import React from 'react';
+import { routes } from './routes';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import App from '../App';
 import { ErrorPage } from '../pages/Error';
 import { AboutUsPage } from '../pages/AboutUs';
 import { HomePage } from '../pages/Home';
-import { routes } from './routes';
+import FormPage from '../pages/Form/FormPage';
 
 export const routerConfig: RouteObject[] = [
   {
@@ -19,6 +20,10 @@ export const routerConfig: RouteObject[] = [
       {
         path: routes.aboutUs,
         element: <AboutUsPage />,
+      },
+      {
+        path: routes.form,
+        element: <FormPage />,
       },
     ],
   },
