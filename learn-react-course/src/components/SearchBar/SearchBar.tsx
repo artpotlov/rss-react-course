@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getSearchData, saveSearchData } from '../../utils/localStorage';
+import { getSearchData, saveSearchData } from '../../utils/local-storage';
 import styles from './SearchBar.module.scss';
 
 type TProps = Record<string, never>;
@@ -11,7 +11,7 @@ class SearchBar extends Component<TProps, TState> {
   constructor(props: TProps) {
     super(props);
     const data = getSearchData();
-    this.setState({ value: data || '' });
+    this.state = { value: data || '' };
   }
 
   componentWillUnmount() {
