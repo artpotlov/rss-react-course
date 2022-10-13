@@ -1,3 +1,3 @@
-import FromPage from './FormPage';
+import FormPage from './FormPage';
 
-export { FromPage };
+export { FormPage };

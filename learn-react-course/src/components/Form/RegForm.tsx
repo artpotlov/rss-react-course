@@ -42,6 +42,7 @@ const RegForm = () => {
     <>
       <form
         noValidate
+        data-testid="reg-form"
         ref={formRef}
         onSubmit={onSubmitForm}
         onChange={() => {

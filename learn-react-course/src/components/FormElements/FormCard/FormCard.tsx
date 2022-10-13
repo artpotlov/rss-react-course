@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { TFormStore } from '../../../types/types';
 
 type TProps = {
-  cards: TFormStore[];
+  cards?: TFormStore[];
 } & React.ComponentPropsWithoutRef<'div'>;
 
 const Wrapper = styled.div`
@@ -27,10 +27,10 @@ const Item = styled.li`
   font-size: 14px;
 `;
 
-const FormCard = ({ cards, className }: TProps) => {
+const FormCard = ({ cards, className, ...props }: TProps) => {
   return (
-    <Wrapper className={className}>
-      {cards.map((card, index) => {
+    <Wrapper className={className} {...props}>
+      {cards?.map((card, index) => {
         return (
           <BaseCard key={index}>
             {Boolean(card.userName) && (

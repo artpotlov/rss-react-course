@@ -20,7 +20,14 @@ const Group = styled.div`
   gap: 8px;
 `;
 
-const BoxGroup = ({ title, helperText, required, children, className, ...props }: TProps) => {
+const BoxGroup: React.FC<TProps> = ({
+  title,
+  helperText,
+  required,
+  children,
+  className,
+  ...props
+}) => {
   return (
     <div className={className}>
       {Boolean(title) && (
