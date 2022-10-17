@@ -1,43 +1,60 @@
-import React, { Component } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import styled from '@emotion/styled';
 import { getSearchData, saveSearchData } from '../../utils/local-storage';
-import styles from './SearchBar.module.scss';
 
-type TProps = Record<string, never>;
-type TState = {
-  value: string;
+type TProps = {
+  dataTestId?: string;
 };
 
-class SearchBar extends Component<TProps, TState> {
-  constructor(props: TProps) {
-    super(props);
-    const data = getSearchData();
-    this.state = { value: data || '' };
-  }
+const SearchBar: React.FC<TProps> = ({ dataTestId }) => {
+  const [value, setValue] = useState('');
+  const valueRef = useRef(value);
 
-  componentWillUnmount() {
-    saveSearchData(this.state.value);
-  }
+  const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!(event.target instanceof HTMLInputElement)) return;
+    setValue(event.target.value.trim());
+  };
 
-  onChange(e: React.ChangeEvent<HTMLInputElement>) {
-    if (!e) return;
-    this.setState({ value: e.target.value });
-  }
+  useEffect(() => {
+    const valFromLocalStorage = getSearchData();
+    if (!valFromLocalStorage) return;
+    setValue(valFromLocalStorage);
+  }, []);
 
-  render() {
-    return (
-      <form className={styles.form}>
-        <input
-          data-testid="search-bar"
-          type="search"
-          placeholder="Search by..."
-          className={styles.searchInput}
-          value={this.state.value}
-          onChange={this.onChange}
-        />
-        <button className={styles.submit}>Search</button>
-      </form>
-    );
-  }
-}
+  useEffect(() => {
+    valueRef.current = value;
+  }, [value]);
+
+  useEffect(() => {
+    return () => {
+      saveSearchData(valueRef.current);
+    };
+  }, []);
+
+  return (
+    <SearchInput
+      placeholder="Search by..."
+      type="search"
+      data-testid={dataTestId}
+      value={value}
+      onChange={onInputChange}
+    />
+  );
+};
+
+SearchBar.defaultProps = { dataTestId: 'search-bar' };
 
 export default SearchBar;
+
+const SearchInput = styled.input`
+  padding: 0 1rem;
+  border: 1px solid lightsteelblue;
+  height: 3rem;
+  border-radius: 0.25rem;
+  outline: 0;
+  transition: border 0.2s ease-in-out;
+
+  &:focus {
+    border: 1px solid steelblue;
+  }
+`;

@@ -1,20 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from './ErrorPage.module.scss';
 import { routes } from '../../router/routes';
+import styled from '@emotion/styled';
 
-class ErrorPage extends Component {
-  render() {
-    return (
-      <div data-testid="error-page" className={styles.error}>
-        <div>
-          <h1>404</h1>
-          <p>page not found...</p>
-          <Link to={routes.main}>Go home</Link>
-        </div>
+type TProps = {
+  dataTestId?: string;
+};
+
+const ErrorPage: React.FC<TProps> = ({ dataTestId }) => {
+  return (
+    <ErrorContainer data-testid={dataTestId}>
+      <div>
+        <h1>404</h1>
+        <p>page not found...</p>
+        <Link to={routes.main}>Go home</Link>
       </div>
-    );
-  }
-}
+    </ErrorContainer>
+  );
+};
+
+ErrorPage.defaultProps = { dataTestId: 'error-page' };
 
 export default ErrorPage;
+
+const ErrorContainer = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+`;

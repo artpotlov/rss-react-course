@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class AboutUsPage extends Component {
-  render() {
-    return (
-      <>
-        <h1 data-testid="about-us-page">About Us</h1>
-        <p>This is the about us page</p>
-      </>
-    );
-  }
-}
+type TProps = {
+  dataTestId?: string;
+};
+
+const AboutUsPage: React.FC<TProps> = ({ dataTestId }) => {
+  return (
+    <section data-testid={dataTestId}>
+      <h1>About us page</h1>
+      <p>This is the about us page</p>
+    </section>
+  );
+};
+
+AboutUsPage.defaultProps = { dataTestId: 'about-us-page' };
 
 export default AboutUsPage;

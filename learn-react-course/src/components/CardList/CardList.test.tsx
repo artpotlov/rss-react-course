@@ -36,12 +36,12 @@ describe('Card list tests:', () => {
   });
 
   it('first card has title "test title 1"', () => {
-    const firstCard = screen.getAllByTestId('card')[0].querySelector('.title');
+    const firstCard = screen.getAllByTestId('card')[0];
     expect(firstCard).toHaveTextContent(/Test title 1/i);
   });
 
   it('second card has title "test title 2"', () => {
-    const secondCard = screen.getAllByTestId('card')[1].querySelector('.title');
+    const secondCard = screen.getAllByTestId('card')[1];
     expect(secondCard).toHaveTextContent(/Test title 2/i);
   });
 });
