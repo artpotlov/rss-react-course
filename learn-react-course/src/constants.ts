@@ -30,3 +30,8 @@ export const CITIES: TCity[] = [
     title: 'Nizhny Novgorod',
   },
 ];
+
+export const API_URLS = {
+  main: 'https://fakestoreapi.com',
+  products: 'https://fakestoreapi.com/products',
+};
