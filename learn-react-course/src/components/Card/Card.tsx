@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import styled from '@emotion/styled';
 
 type TProps = {
@@ -7,11 +7,12 @@ type TProps = {
   category: string;
   image: string;
   dataTestId?: string;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 };
 
-const Card: React.FC<TProps> = ({ title, category, price, image, dataTestId }) => {
+const Card: React.FC<TProps> = ({ title, category, price, image, dataTestId, onClick }) => {
   return (
-    <Wrapper data-testid={dataTestId}>
+    <Wrapper data-testid={dataTestId} onClick={onClick}>
       <Image src={image} alt={title} />
       <Title>{title}</Title>
       <Category>{category}</Category>
@@ -25,6 +26,7 @@ Card.defaultProps = { dataTestId: 'card' };
 export default Card;
 
 const Wrapper = styled.div`
+  cursor: ${(p) => (p.onClick ? 'pointer' : 'auto')};
   width: 250px;
   display: flex;
   flex-direction: column;
@@ -32,6 +34,11 @@ const Wrapper = styled.div`
   padding: 1rem;
   border: 1px solid lavender;
   border-radius: 1rem;
+  transition: box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.05);
+  }
 `;
 
 const Image = styled.img`
