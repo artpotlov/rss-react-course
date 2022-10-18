@@ -2,9 +2,13 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
 
-const Loader = () => {
+type TProps = {
+  dataTestId?: string;
+} & React.ComponentPropsWithoutRef<'div'>;
+
+const Loader: React.FC<TProps> = ({ dataTestId }) => {
   return (
-    <Container>
+    <Container data-testid={dataTestId}>
       <IconContainer>
         <Circle />
       </IconContainer>
@@ -12,6 +16,8 @@ const Loader = () => {
     </Container>
   );
 };
+
+Loader.defaultProps = { dataTestId: 'loader' };
 
 export default Loader;
 
