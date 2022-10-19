@@ -1,31 +1,12 @@
 import React from 'react';
-import styled from '@emotion/styled';
 import { TFormStore } from '../../../types/types';
+import BaseCard from './BaseCard.styled';
+import Item from './Item.styled';
+import Wrapper from './Wrapper.styled';
 
 type TProps = {
   cards?: TFormStore[];
 } & React.ComponentPropsWithoutRef<'div'>;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-`;
-
-const BaseCard = styled.ul`
-  margin: 0;
-  width: 300px;
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  border: 1px solid #cfd3d5;
-  border-radius: 16px;
-`;
-
-const Item = styled.li`
-  font-size: 14px;
-`;
 
 const FormCard = ({ cards, className, ...props }: TProps) => {
   return (

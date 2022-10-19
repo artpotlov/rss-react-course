@@ -1,19 +1,8 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import React from 'react';
+import Wrapper from './Wrapper.styled';
 
 const Required = (props: React.ComponentPropsWithoutRef<'span'>) => {
-  return (
-    <span
-      css={css`
-        color: red;
-        font-weight: bold;
-      `}
-      {...props}
-    >
-      &nbsp;*
-    </span>
-  );
+  return <Wrapper {...props}>&nbsp;*</Wrapper>;
 };
 
 export default Required;

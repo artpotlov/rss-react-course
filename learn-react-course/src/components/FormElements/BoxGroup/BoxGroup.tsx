@@ -1,8 +1,8 @@
-import styled from '@emotion/styled';
 import Title from '../Title/Title';
 import HelperText from '../HelperText/HelperText';
 import React from 'react';
 import Required from '../Required/Required';
+import Group from './Group.styled';
 
 type TCustomProps = {
   title?: string;
@@ -13,21 +13,7 @@ type TCustomProps = {
 
 type TProps = TCustomProps & React.ComponentPropsWithoutRef<'div'>;
 
-const Group = styled.div`
-  margin-top: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
-const BoxGroup: React.FC<TProps> = ({
-  title,
-  helperText,
-  required,
-  children,
-  className,
-  ...props
-}) => {
+const BoxGroup = ({ title, helperText, required, children, className, ...props }: TProps) => {
   return (
     <div className={className}>
       {Boolean(title) && (
