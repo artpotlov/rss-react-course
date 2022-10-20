@@ -1,153 +1,151 @@
 /** @jsxImportSource @emotion/react */
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import TextField from '../FormElements/TextField/TextField';
 import { css } from '@emotion/react';
 import { BoxGroup, Date, File, FormCard, Radio, Select } from '../FormElements';
 import CheckBox from '../FormElements/Checkbox/Checkbox';
 import { Button } from '../Button';
-import { TFormErrorFields, TFormStore } from '../../types/types';
 import { CITIES } from '../../constants';
-import { isValidForm } from '../../controllers/Form/form-validation';
-import { getDataFromForm } from '../../controllers/Form/get-data';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { TFormStore } from '../../types/types';
+import {
+  hasFirstAndLastName,
+  isDate,
+  isEmail,
+  isImage,
+  isLengthMoreThanTwo,
+  isNotEmpty,
+  isNotToday,
+  isPhoneNumber,
+  isRequired,
+} from '../../utils/validation';
+import FormContainer from './FormContainer.styled';
 
 const RegForm = () => {
-  const formRef = useRef<HTMLFormElement>(null);
-  const [error, setErrorState] = useState<TFormErrorFields>({
-    userName: {},
-    email: {},
-    phoneNumber: {},
-    birthday: {},
-    city: {},
-    gender: {},
-    cashback: {},
-    file: {},
-  });
-
   const [formStore, setFormStore] = useState<TFormStore[]>([]);
-  const [isDisabledSubmit, setDisableSubmit] = useState(true);
-
-  const onSubmitForm = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formRef.current) return;
-    if (!isValidForm(formRef.current, setErrorState)) {
-      setDisableSubmit(true);
-      return;
-    }
-    getDataFromForm(formRef.current, setFormStore);
-    formRef.current.reset();
-    setDisableSubmit(true);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isValid, errors },
+  } = useForm({ mode: 'onBlur' });
+  const onSubmit: SubmitHandler<TFormStore> = (data) => {
+    setFormStore((prev) => [data, ...prev]);
+    reset();
   };
+
+  const gridFullLength = css`
+    grid-column-end: span 2;
+  `;
 
   return (
     <>
-      <form
-        noValidate
-        data-testid="reg-form"
-        ref={formRef}
-        onSubmit={onSubmitForm}
-        onChange={() => {
-          setDisableSubmit(false);
-        }}
-        css={css`
-          max-width: 1110px;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          grid-auto-rows: auto;
-          gap: 16px;
-        `}
-      >
+      <FormContainer noValidate data-testid="reg-form" onSubmit={handleSubmit(onSubmit)}>
         <TextField
-          css={css`
-            grid-column-end: span 2;
-          `}
+          css={gridFullLength}
+          {...register('userName', {
+            required: isRequired('the user field is required'),
+            validate: {
+              isNotEmpty,
+              isLengthMoreThanTwo,
+              hasFirstAndLastName,
+            },
+          })}
+          helperText={errors?.userName?.message as string}
           type="text"
-          name="user-name"
           placeholder="First and last name"
           title="User"
-          error={error.userName.error}
-          helperText={error.userName.helperText}
           autoFocus
           required
         />
         <TextField
+          {...register('email', {
+            required: isRequired('the email field is required'),
+            validate: {
+              isNotEmpty,
+              isEmail,
+            },
+          })}
+          helperText={errors?.email?.message as string}
           type="email"
-          error={error.email.error}
-          helperText={error.email.helperText}
-          name="email"
           placeholder="name@mail.com"
           title="E-mail"
           required
         />
         <TextField
+          {...register('phoneNumber', {
+            required: isRequired('the phone number field is required'),
+            validate: {
+              isNotEmpty,
+              isPhoneNumber,
+            },
+          })}
+          helperText={errors?.phoneNumber?.message as string}
           type="tel"
-          error={error.phoneNumber.error}
-          helperText={error.phoneNumber.helperText}
           placeholder="9991234567"
           title="Phone number"
-          name="phone-number"
           required
         />
         <Date
-          error={error.birthday.error}
-          helperText={error.birthday.helperText}
+          {...register('birthday', {
+            required: isRequired('the birthday field is required'),
+            validate: {
+              isNotEmpty,
+              isDate,
+              isNotToday,
+            },
+          })}
+          helperText={errors?.birthday?.message as string}
           title="Birthday"
-          name="birthday"
           required
         />
         <Select
-          error={error.city.error}
-          helperText={error.city.helperText}
+          {...register('city', {
+            required: isRequired('please chose your city name'),
+          })}
+          helperText={errors?.city?.message as string}
           title="City"
-          name="city"
           options={CITIES}
           required
         />
-        <BoxGroup helperText={error.gender.helperText} title="Gender" required>
-          <Radio error={error.gender.error} value="male" title="Male" name="gender" />
-          <Radio error={error.gender.error} value="female" title="Female" name="gender" />
+        <BoxGroup helperText={errors?.gender?.message as string} title="Gender" required>
+          <Radio
+            {...register('gender', {
+              required: isRequired('the gender is required'),
+            })}
+            value="male"
+            title="Male"
+          />
+          <Radio
+            {...register('gender', {
+              required: isRequired('the gender is required'),
+            })}
+            value="female"
+            title="Female"
+          />
         </BoxGroup>
-        <BoxGroup helperText={error.cashback.helperText} title="Cashback category">
-          <CheckBox
-            error={error.cashback.error}
-            name="cashback"
-            title="1% for everything"
-            value="all"
-          />
-          <CheckBox
-            error={error.cashback.error}
-            name="cashback"
-            title="5% for diamonds"
-            value="diamonds"
-          />
-          <CheckBox
-            error={error.cashback.error}
-            name="cashback"
-            title="10% for backpacks"
-            value="backpacks"
-          />
+        <BoxGroup title="Cashback category">
+          <CheckBox {...register('cashback')} title="1% for everything" value="all" />
+          <CheckBox {...register('cashback')} title="5% for diamonds" value="diamonds" />
+          <CheckBox {...register('cashback')} title="10% for backpacks" value="backpacks" />
         </BoxGroup>
         <File
-          error={error.file.error}
-          helperText={error.file.helperText}
+          css={gridFullLength}
+          {...register('file', {
+            validate: {
+              isImage,
+            },
+          })}
+          helperText={errors?.file?.message as string}
           title="Avatar's file"
-          name="file"
-          css={css`
-            grid-column: span 2;
-          `}
         />
-        <Button type="submit" disabled={isDisabledSubmit}>
+        <Button type="submit" disabled={!isValid}>
           Send
         </Button>
-      </form>
+      </FormContainer>
       {formStore.length > 0 && (
         <>
-          <h2
-            css={css`
-              margin-top: 32px;
-            `}
-          >
-            Form&apos;s data
-          </h2>
+          <h2>Form&apos;s data</h2>
           <FormCard cards={formStore} />
         </>
       )}

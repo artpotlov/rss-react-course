@@ -50,9 +50,9 @@ const FormCard = ({ cards, className, ...props }: TProps) => {
                 {card.cashback?.map((cash, i, arr) => `${cash}${i !== arr.length - 1 ? ', ' : ''}`)}
               </Item>
             )}
-            {Boolean(card.file) && (
+            {Boolean(card.file?.length) && (
               <Item>
-                <b>file:</b> {card.file}
+                <b>file:</b> {card.file && card.file[0].name}
               </Item>
             )}
           </BaseCard>

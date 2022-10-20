@@ -22,17 +22,6 @@ export type TErrorVal = {
   helperText?: string;
 };
 
-export type TFormErrorFields = {
-  userName: TErrorVal;
-  email: TErrorVal;
-  phoneNumber: TErrorVal;
-  birthday: TErrorVal;
-  city: TErrorVal;
-  gender: TErrorVal;
-  cashback: TErrorVal;
-  file: TErrorVal;
-};
-
 export type TFormStore = {
   userName?: string;
   email?: string;
@@ -41,5 +30,5 @@ export type TFormStore = {
   city?: string;
   gender?: string;
   cashback?: string[];
-  file?: string;
+  file?: FileList;
 };

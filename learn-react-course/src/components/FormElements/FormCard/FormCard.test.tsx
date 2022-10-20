@@ -3,6 +3,9 @@ import { render, screen } from '@testing-library/react';
 import { FormCard } from '../index';
 import { TFormStore } from '../../../types/types';
 
+const files = new DataTransfer();
+files.items.add(new File([], 'test-image.png'));
+
 const cards: TFormStore[] = [
   {
     userName: 'test user name',
@@ -12,7 +15,7 @@ const cards: TFormStore[] = [
     birthday: '1999-12-12',
     city: 'default city',
     cashback: ['cash 1', 'cash 2'],
-    file: 'test-file.png',
+    file: files.files,
   },
 ];
 
