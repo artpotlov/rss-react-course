@@ -1,19 +1,18 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { TGood } from '../../types/types';
+import { TProduct } from '../../types/types';
 
 type TProps = {
   dataTestId?: string;
-} & Partial<TGood> &
-  React.ComponentPropsWithoutRef<'div'>;
+} & Partial<TProduct>;
 
-const Info: React.FC<TProps> = ({ title, category, price, description, image, dataTestId }) => {
+const Info: React.FC<TProps> = ({ title, category, price, description, images, dataTestId }) => {
   return (
     <Container data-testid={dataTestId}>
-      <Image src={image} alt={title} />
+      <Image src={Array.isArray(images) ? images[0] : ''} alt={title} />
       <TextWrapper>
         <Title>{title}</Title>
-        <Category>{category}</Category>
+        <Category>{category?.name}</Category>
         <Price>$ {price}</Price>
         <Description>{description}</Description>
       </TextWrapper>

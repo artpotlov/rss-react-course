@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { SearchBar } from '../../components/SearchBar';
 import { CardList } from '../../components/CardList';
 import styled from '@emotion/styled';
-import { TGood } from '../../types/types';
+import { TProduct } from '../../types/types';
 import { getAllProducts, getLimitProducts } from '../../utils/api';
 import { Loader } from '../../components/Loader';
 import { AxiosError } from 'axios';
@@ -12,7 +12,7 @@ type TProps = {
 };
 
 const HomePage: React.FC<TProps> = ({ dataTestId }) => {
-  const [products, setProducts] = useState<TGood[]>([]);
+  const [products, setProducts] = useState<TProduct[]>([]);
   const [searchVal, setSearchVal] = useState('');
   const [loading, setLoading] = useState(true);
 

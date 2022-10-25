@@ -32,6 +32,6 @@ export const CITIES: TCity[] = [
 ];
 
 export const API_URLS = {
-  main: 'https://fakestoreapi.com',
-  products: 'https://fakestoreapi.com/products',
+  main: 'https://api.escuelajs.co/api/v1',
+  products: 'https://api.escuelajs.co/api/v1/products',
 };

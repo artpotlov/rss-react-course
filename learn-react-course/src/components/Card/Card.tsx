@@ -1,21 +1,18 @@
 import React, { MouseEventHandler } from 'react';
 import styled from '@emotion/styled';
+import { TProduct } from '../../types/types';
 
 type TProps = {
-  title: string;
-  price: number;
-  category: string;
-  image: string;
   dataTestId?: string;
   onClick?: MouseEventHandler<HTMLDivElement>;
-};
+} & Partial<TProduct>;
 
-const Card: React.FC<TProps> = ({ title, category, price, image, dataTestId, onClick }) => {
+const Card: React.FC<TProps> = ({ title, category, price, images, dataTestId, onClick }) => {
   return (
     <Wrapper data-testid={dataTestId} onClick={onClick}>
-      <Image src={image} alt={title} />
+      <Image src={images && images[0]} alt={title} />
       <Title>{title}</Title>
-      <Category>{category}</Category>
+      <Category>{category?.name}</Category>
       <Price>$ {price}</Price>
     </Wrapper>
   );

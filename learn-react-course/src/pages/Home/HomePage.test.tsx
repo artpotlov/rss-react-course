@@ -2,18 +2,22 @@ import React from 'react';
 import { AxiosError } from 'axios';
 import { act, render, screen } from '@testing-library/react';
 import { HomePage } from './index';
-import { TGood } from '../../types/types';
+import { TProduct } from '../../types/types';
 import * as API from '../../utils/api';
 import userEvent from '@testing-library/user-event';
 
-const mockData: TGood[] = [
+const mockData: TProduct[] = [
   {
     id: 1,
     title: 'Title 1',
     description: 'Description 1',
-    category: 'Category 1',
+    category: {
+      id: 1,
+      name: 'Category 1',
+      image: 'test-category-img.png',
+    },
     price: 123,
-    image: 'test-img.png',
+    images: ['test-img.png'],
   },
 ];
 

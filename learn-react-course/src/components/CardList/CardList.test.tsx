@@ -1,24 +1,32 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { CardList } from './index';
-import { TGood } from '../../types/types';
+import { TProduct } from '../../types/types';
 
-const fakeGoods: TGood[] = [
+const fakeGoods: TProduct[] = [
   {
     id: 1,
     title: 'Test title 1',
     price: 123,
-    category: 'Test category 1',
+    category: {
+      id: 1,
+      name: 'Test category 1',
+      image: '/assets/img-1.png',
+    },
     description: 'Test description 1',
-    image: '/assets/img-1.jpg',
+    images: ['/assets/img-1.jpg'],
   },
   {
     id: 2,
     title: 'Test title 2',
-    price: 12345,
-    category: 'Test category 2',
+    price: 456,
+    category: {
+      id: 2,
+      name: 'Test category 2',
+      image: '/assets/img-2.png',
+    },
     description: 'Test description 2',
-    image: '/assets/img-2.jpg',
+    images: ['/assets/img-2.jpg'],
   },
 ];
 

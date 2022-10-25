@@ -1,21 +1,25 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Card } from './index';
-import { TGood } from '../../types/types';
+import { TProduct } from '../../types/types';
 
-const data: TGood = {
+const data: TProduct = {
   id: 1,
   title: 'Test card title',
   price: 123,
-  category: 'Test category',
-  image: '/assets/img.jpg',
+  category: {
+    id: 1,
+    name: 'Test category',
+    image: '/assets/img.png',
+  },
+  images: ['/assets/img.jpg'],
   description: 'Test description',
 };
 
 describe('Card tests:', () => {
   beforeEach(() => {
     render(
-      <Card title={data.title} price={data.price} category={data.category} image={data.image} />
+      <Card title={data.title} price={data.price} category={data.category} images={data.images} />
     );
   });
 
