@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { SearchBar } from '../../components/SearchBar';
 import { CardList } from '../../components/CardList';
 import styled from '@emotion/styled';
 import { TGood } from '../../types/types';
 import { getAllProducts, getLimitProducts } from '../../utils/api';
 import { Loader } from '../../components/Loader';
+import { AxiosError } from 'axios';
 
 type TProps = {
   dataTestId?: string;
@@ -15,32 +16,40 @@ const HomePage: React.FC<TProps> = ({ dataTestId }) => {
   const [searchVal, setSearchVal] = useState('');
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        setLoading(true);
-        const products = await getAllProducts();
-        const filteringData = products.filter((product) =>
-          product.title.toLowerCase().includes(searchVal.toLowerCase())
-        );
-        setProducts(filteringData);
-        setLoading(false);
-      } catch (error) {
-        if (!(error instanceof ErrorEvent)) return;
-        console.error(error.message);
-      }
-    })();
-  }, [searchVal]);
+  const productsRemote = useMemo(async () => await getAllProducts(), []);
 
   useEffect(() => {
     (async () => {
       try {
         setLoading(true);
-        setProducts(await getLimitProducts());
+        const products = await productsRemote;
+        const filteringData = products.filter((product) =>
+          product.title.toLowerCase().includes(searchVal.toLowerCase())
+        );
+        if (searchVal.length === 0) {
+          filteringData.splice(20);
+        }
+        setProducts(filteringData);
         setLoading(false);
       } catch (error) {
-        if (!(error instanceof ErrorEvent)) return;
-        console.error(error.message);
+        if (error instanceof AxiosError) {
+          console.error(error.message);
+        }
+      }
+    })();
+  }, [searchVal, productsRemote]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setLoading(true);
+        const products = await getLimitProducts();
+        setProducts(products);
+        setLoading(false);
+      } catch (error) {
+        if (error instanceof AxiosError) {
+          console.error(error.message);
+        }
       }
     })();
   }, []);
