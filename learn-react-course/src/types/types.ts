@@ -13,6 +13,12 @@ export type TProduct = {
   images: string[];
 };
 
+export type TBadResponse = {
+  statusCode: number;
+  message: string;
+  error: string;
+};
+
 export type THeaderLinks = {
   name: string;
   path: string;
