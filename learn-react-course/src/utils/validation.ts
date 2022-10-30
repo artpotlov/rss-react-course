@@ -3,22 +3,22 @@ export const isNotEmpty = (str: string) => {
 };
 
 export const hasFirstAndLastName = (userName: string) => {
-  const pattern = new RegExp(/^\w\D+\s\w\D+$/i);
+  const pattern = new RegExp(/^[\p{L}-]+\s[\p{L}-]+$/imu);
   return pattern.test(userName.trim()) || 'the user must have a first name and last name';
 };
 
 export const isEmail = (email: string) => {
-  const pattern = new RegExp(/^[\w\d._:$!%-]+@[\w\d.-]+.[\w\d]{2,}$/i);
+  const pattern = new RegExp(/^[\w._:$!%-]+@[\w.-]+.\w{2,}$/im);
   return pattern.test(email.trim()) || 'the email should look like user@mail.com';
 };
 
 export const isPhoneNumber = (phone: string) => {
-  const pattern = new RegExp(/^\d{10}$/i);
+  const pattern = new RegExp(/^\d{10}$/im);
   return pattern.test(phone.trim()) || 'the phone number should look like 9991234567';
 };
 
 export const isDate = (date: string) => {
-  const pattern = new RegExp(/^\d{4}-\d{1,2}-\d{1,2}/i);
+  const pattern = new RegExp(/^\d{4}-\d{1,2}-\d{1,2}/im);
   return pattern.test(date.trim()) || "the birthday isn't correct";
 };
 
@@ -28,7 +28,7 @@ export const isNotToday = (date: string) => {
 
 export const isImage = (files: FileList) => {
   if (files.length === 0) return;
-  const pattern = new RegExp(/.(png)|(jpg)|(webp)|(svg)$/i);
+  const pattern = new RegExp(/.(png)|(jpg)|(webp)|(svg)$/im);
   return pattern.test(files[0].name) || 'the file must be an image';
 };
 

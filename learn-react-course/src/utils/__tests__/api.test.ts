@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAllProducts, getLimitProducts, getProductByID } from './api';
+import { getAllProducts, getLimitProducts, getProductByID } from '../api';
 
 jest.mock('axios');
 const axiosMock = axios as jest.Mocked<typeof axios>;
