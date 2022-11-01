@@ -1,68 +1,36 @@
-import styled from '@emotion/styled';
 import React from 'react';
 import { TProduct } from '../../types/types';
+import {
+  InfoCategory,
+  InfoContainer,
+  InfoDescription,
+  InfoImage,
+  InfoPrice,
+  InfoTextWrapper,
+  InfoTitle,
+} from './Info.styled';
 
 type TProps = {
   dataTestId?: string;
 } & Partial<TProduct>;
 
-const Info: React.FC<TProps> = ({ title, category, price, description, images, dataTestId }) => {
+export const Info: React.FC<TProps> = ({
+  title,
+  category,
+  price,
+  description,
+  images,
+  dataTestId,
+}) => {
   return (
-    <Container data-testid={dataTestId}>
-      <Image src={Array.isArray(images) ? images[0] : ''} alt={title} />
-      <TextWrapper>
-        <Title>{title}</Title>
-        <Category>{category?.name}</Category>
-        <Price>$ {price}</Price>
-        <Description>{description}</Description>
-      </TextWrapper>
-    </Container>
+    <InfoContainer data-testid={dataTestId}>
+      <InfoImage src={Array.isArray(images) ? images[0] : ''} alt={title} />
+      <InfoTextWrapper>
+        <InfoTitle>{title}</InfoTitle>
+        <InfoCategory>{category?.name}</InfoCategory>
+        <InfoPrice>$ {price}</InfoPrice>
+        <InfoDescription>{description}</InfoDescription>
+      </InfoTextWrapper>
+    </InfoContainer>
   );
 };
-
-Info.defaultProps = { dataTestId: 'info-modal' };
-
-export default Info;
-
-const Container = styled.div`
-  display: flex;
-  height: 100%;
-  gap: 16px;
-  padding: 32px;
-  align-items: center;
-`;
-
-const TextWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  justify-content: center;
-`;
-
-const Image = styled.img`
-  max-width: 200px;
-  max-height: 200px;
-  object-fit: contain;
-`;
-
-const Title = styled.span`
-  font-size: 20px;
-  line-height: 1.2;
-  font-weight: bold;
-`;
-
-const Category = styled.span`
-  font-size: 14px;
-  line-height: 1.5;
-`;
-
-const Price = styled.span`
-  font-size: 18px;
-  line-height: 1.2;
-`;
-
-const Description = styled.span`
-  font-size: 12px;
-  line-height: 1.5;
-  color: gray;
-`;

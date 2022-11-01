@@ -1,3 +1,1 @@
-import RegForm from './RegForm';
-
-export { RegForm };
+export { RegForm } from './RegForm';

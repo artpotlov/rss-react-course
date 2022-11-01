@@ -1,8 +1,8 @@
-import Title from '../Title/Title';
-import HelperText from '../HelperText/HelperText';
+import { Title } from '../Title';
+import { HelperText } from '../HelperText';
 import React from 'react';
-import Required from '../Required/Required';
-import Group from './Group.styled';
+import { Required } from '../Required';
+import BoxGroupContainer from './BoxGroup.styled';
 
 type TCustomProps = {
   title?: string;
@@ -13,7 +13,14 @@ type TCustomProps = {
 
 type TProps = TCustomProps & React.ComponentPropsWithoutRef<'div'>;
 
-const BoxGroup = ({ title, helperText, required, children, className, ...props }: TProps) => {
+export const BoxGroup = ({
+  title,
+  helperText,
+  required,
+  children,
+  className,
+  ...props
+}: TProps) => {
   return (
     <div className={className}>
       {Boolean(title) && (
@@ -22,10 +29,8 @@ const BoxGroup = ({ title, helperText, required, children, className, ...props }
           {required && <Required />}
         </Title>
       )}
-      <Group {...props}>{children}</Group>
+      <BoxGroupContainer {...props}>{children}</BoxGroupContainer>
       {Boolean(helperText) && <HelperText>{helperText}</HelperText>}
     </div>
   );
 };
-
-export default BoxGroup;

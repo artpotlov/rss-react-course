@@ -1,9 +1,8 @@
 import React, { ForwardedRef } from 'react';
-import Title from '../Title/Title';
-import HelperText from '../HelperText/HelperText';
-import Required from '../Required/Required';
-import BaseSelect from './BaseSelect.styled';
-import Wrapper from './Wrapper.styled';
+import { Title } from '../Title';
+import { HelperText } from '../HelperText';
+import { Required } from '../Required';
+import { SelectElement, SelectWrapper } from './Select.styled';
 
 type TCustomProps = {
   error?: boolean;
@@ -17,20 +16,20 @@ type TCustomProps = {
 
 type TProps = TCustomProps & React.ComponentPropsWithoutRef<'select'>;
 
-const Select = React.forwardRef(
+export const Select = React.forwardRef(
   (
     { title, helperText, options, className, ...props }: TProps,
     ref: ForwardedRef<HTMLSelectElement>
   ) => {
     return (
-      <Wrapper className={className}>
+      <SelectWrapper className={className}>
         {Boolean(title) && (
           <Title>
             {title}
             {props.required && <Required />}
           </Title>
         )}
-        <BaseSelect ref={ref} {...props}>
+        <SelectElement ref={ref} {...props}>
           <option value="0" disabled>
             Chose the item:
           </option>
@@ -42,11 +41,9 @@ const Select = React.forwardRef(
                 </option>
               );
             })}
-        </BaseSelect>
+        </SelectElement>
         {Boolean(helperText) && <HelperText>{helperText}</HelperText>}
-      </Wrapper>
+      </SelectWrapper>
     );
   }
 );
-
-export default Select;

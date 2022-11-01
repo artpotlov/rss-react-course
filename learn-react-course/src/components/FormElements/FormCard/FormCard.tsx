@@ -1,65 +1,61 @@
 import React from 'react';
 import { TFormStore } from '../../../types/types';
-import BaseCard from './BaseCard.styled';
-import Item from './Item.styled';
-import Wrapper from './Wrapper.styled';
+import { FormCardItem, FormCardItems, FormCardWrapper } from './FormCard.styled';
 
 type TProps = {
   cards?: TFormStore[];
 } & React.ComponentPropsWithoutRef<'div'>;
 
-const FormCard = ({ cards, className, ...props }: TProps) => {
+export const FormCard = ({ cards, className, ...props }: TProps) => {
   return (
-    <Wrapper className={className} {...props}>
+    <FormCardWrapper className={className} {...props}>
       {cards?.map((card, index) => {
         return (
-          <BaseCard key={index}>
+          <FormCardItems key={index}>
             {Boolean(card.userName) && (
-              <Item>
+              <FormCardItem>
                 <b>user name:</b> {card.userName}
-              </Item>
+              </FormCardItem>
             )}
             {Boolean(card.email) && (
-              <Item>
+              <FormCardItem>
                 <b>email:</b> {card.email}
-              </Item>
+              </FormCardItem>
             )}
             {Boolean(card.phoneNumber) && (
-              <Item>
+              <FormCardItem>
                 <b>phone:</b> {card.phoneNumber}
-              </Item>
+              </FormCardItem>
             )}
             {Boolean(card.birthday) && (
-              <Item>
+              <FormCardItem>
                 <b>birthday:</b> {card.birthday}
-              </Item>
+              </FormCardItem>
             )}
             {Boolean(card.city) && (
-              <Item>
+              <FormCardItem>
                 <b>city:</b> {card.city}
-              </Item>
+              </FormCardItem>
             )}
             {Boolean(card.gender) && (
-              <Item>
+              <FormCardItem>
                 <b>gender:</b> {card.gender}
-              </Item>
+              </FormCardItem>
             )}
             {Boolean(card.cashback?.length) && (
-              <Item>
+              <FormCardItem>
                 <b>cashback:</b>{' '}
                 {card.cashback?.map((cash, i, arr) => `${cash}${i !== arr.length - 1 ? ', ' : ''}`)}
-              </Item>
+              </FormCardItem>
             )}
             {Boolean(card.file?.length) && (
-              <Item>
+              <FormCardItem>
                 <b>file:</b> {card.file && card.file[0].name}
-              </Item>
+              </FormCardItem>
             )}
-          </BaseCard>
+          </FormCardItems>
         );
       })}
-    </Wrapper>
+    </FormCardWrapper>
   );
 };
-
-export default FormCard;

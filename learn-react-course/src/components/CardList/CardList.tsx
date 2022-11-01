@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { TProduct } from '../../types/types';
 import { Card } from '../Card';
-import styled from '@emotion/styled';
 import { Modal } from '../Modal';
 import { getProductByID } from '../../utils/api';
 import { Info } from '../Info';
+import { CardListWrapper } from './CardList.styled';
 
 type TProps = {
   goods?: TProduct[];
   dataTestId?: string;
 };
 
-const CardList: React.FC<TProps> = ({ goods, dataTestId }) => {
+export const CardList = ({ goods, dataTestId }: TProps) => {
   const [isShowModal, setShowModal] = useState(false);
   const [fullCardData, setFullCardData] = useState<Partial<TProduct>>({});
   const clickToCard = async (id: number) => {
@@ -28,7 +28,7 @@ const CardList: React.FC<TProps> = ({ goods, dataTestId }) => {
           <Info {...fullCardData} />
         </Modal>
       )}
-      <Wrapper data-testid={dataTestId}>
+      <CardListWrapper data-testid={dataTestId}>
         {Boolean(goods?.length) &&
           goods?.map(({ id, title, price, category, images }) => (
             <Card
@@ -41,19 +41,7 @@ const CardList: React.FC<TProps> = ({ goods, dataTestId }) => {
             />
           ))}
         {!Boolean(goods?.length) && <div>☹️ Products are not found...</div>}
-      </Wrapper>
+      </CardListWrapper>
     </>
   );
 };
-
-CardList.defaultProps = { dataTestId: 'card-list' };
-
-export default CardList;
-
-const Wrapper = styled.div`
-  margin-top: 2rem;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.25rem;
-`;

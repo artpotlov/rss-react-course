@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styled from '@emotion/styled';
 import { getSearchData, saveSearchData } from '../../utils/local-storage';
+import { SearchInput } from './SearchBar.styled';
 
 type TProps = {
   dataTestId?: string;
   setValue?: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const SearchBar: React.FC<TProps> = ({ setValue, dataTestId }) => {
+export const SearchBar = ({ setValue, dataTestId }: TProps) => {
   const [searchVal, setSearchVal] = useState(getSearchData() || '');
   const searchValRef = useRef(searchVal);
 
@@ -42,26 +42,3 @@ const SearchBar: React.FC<TProps> = ({ setValue, dataTestId }) => {
     />
   );
 };
-
-SearchBar.defaultProps = { dataTestId: 'search-bar' };
-
-export default SearchBar;
-
-const SearchInput = styled.input`
-  height: 58px;
-  border: 1px solid #cfd3d5;
-  border-radius: 8px;
-  padding: 8px 16px;
-  font-size: 16px;
-  line-height: 1;
-  outline: none;
-  transition: border 0.2s ease-in-out;
-
-  &::placeholder {
-    color: #abafb1;
-  }
-
-  &:focus {
-    border: 1px solid #5570f1;
-  }
-`;

@@ -1,13 +1,15 @@
 import React from 'react';
 import { RegForm } from '../../components/Form';
 
-const FormPage = () => {
+type TProps = {
+  dataTestId?: string;
+};
+
+export const FormPage = ({ dataTestId }: TProps) => {
   return (
     <>
-      <h1 data-testid="form-page">Form Page</h1>
+      <h1 data-testid={dataTestId || 'form-page'}>Form Page</h1>
       <RegForm />
     </>
   );
 };
-
-export default FormPage;

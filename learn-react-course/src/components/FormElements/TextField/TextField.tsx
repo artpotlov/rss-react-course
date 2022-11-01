@@ -1,9 +1,8 @@
 import React, { ForwardedRef } from 'react';
-import HelperText from '../HelperText/HelperText';
-import Title from '../Title/Title';
-import Required from '../Required/Required';
-import Field from './Field.styled';
-import Label from './Label.styled';
+import { HelperText } from '../HelperText';
+import { Title } from '../Title';
+import { Required } from '../Required';
+import { TextFieldInput, TextFieldLabel } from './TextField.styled';
 
 type TFieldType = 'text' | 'password' | 'email' | 'tel';
 
@@ -16,24 +15,22 @@ type TCustomProps = {
 
 type TProps = TCustomProps & React.ComponentPropsWithoutRef<'input'>;
 
-const TextField = React.forwardRef(
+export const TextField = React.forwardRef(
   (
     { title, helperText, className, required, ...props }: TProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
-      <Label className={className}>
+      <TextFieldLabel className={className}>
         {Boolean(title) && (
           <Title>
             {title}
             {required && <Required />}
           </Title>
         )}
-        <Field ref={ref} required={required} {...props} />
+        <TextFieldInput ref={ref} required={required} {...props} />
         {Boolean(helperText) && <HelperText>{helperText}</HelperText>}
-      </Label>
+      </TextFieldLabel>
     );
   }
 );
-
-export default TextField;

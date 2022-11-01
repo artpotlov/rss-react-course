@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const Button = styled.button`
+export const Button = styled.button`
   width: fit-content;
   height: 48px;
   padding: 8px 32px;
@@ -29,5 +29,3 @@ const Button = styled.button`
     cursor: default;
   }
 `;
-
-export default Button;

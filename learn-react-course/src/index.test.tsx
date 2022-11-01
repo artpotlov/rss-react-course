@@ -15,7 +15,7 @@ const renderPage = (pageNum: number) => {
   render(<RouterProvider router={router} />);
 };
 
-describe('Router tests:', () => {
+describe('Router tests', () => {
   it('home page rendered', () => {
     renderPage(0);
     expect(screen.getByTestId('home-page')).toBeInTheDocument();

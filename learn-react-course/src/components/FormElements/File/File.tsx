@@ -1,9 +1,8 @@
 import React, { ForwardedRef } from 'react';
-import Title from '../Title/Title';
-import HelperText from '../HelperText/HelperText';
-import Required from '../Required/Required';
-import BaseFile from './BaseFile.styled';
-import Label from './Label.styled';
+import { Title } from '../Title';
+import { HelperText } from '../HelperText';
+import { Required } from '../Required';
+import { FileInput, FileLabel } from './File.styled';
 
 type TCustomProps = {
   title?: string;
@@ -14,20 +13,19 @@ type TCustomProps = {
 
 type TProps = TCustomProps & React.ComponentPropsWithoutRef<'input'>;
 
-const File = React.forwardRef(
+export const File = React.forwardRef(
   ({ title, helperText, className, ...props }: TProps, ref: ForwardedRef<HTMLInputElement>) => {
     return (
-      <Label className={className}>
+      <FileLabel className={className}>
         {Boolean(title) && (
           <Title>
             {title}
             {props.required && <Required />}
           </Title>
         )}
-        <BaseFile type="file" ref={ref} {...props} />
+        <FileInput type="file" ref={ref} {...props} />
         {Boolean(helperText) && <HelperText>{helperText}</HelperText>}
-      </Label>
+      </FileLabel>
     );
   }
 );
-export default File;

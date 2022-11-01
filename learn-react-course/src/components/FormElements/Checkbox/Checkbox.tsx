@@ -1,9 +1,7 @@
 import React, { ForwardedRef } from 'react';
-import HelperText from '../HelperText/HelperText';
-import Title from '../Title/Title';
-import BaseCheckbox from './BaseCheckbox.styled';
-import Label from './Label.styled';
-import Wrapper from './Wrapper.styled';
+import { HelperText } from '../HelperText';
+import { Title } from '../Title';
+import { CheckboxInput, CheckboxLabel, CheckboxWrapper } from './Checkbox.styled';
 
 type TCustomProps = {
   error?: boolean;
@@ -14,18 +12,16 @@ type TCustomProps = {
 
 type TProps = TCustomProps & React.ComponentPropsWithoutRef<'input'>;
 
-const CheckBox = React.forwardRef(
+export const CheckBox = React.forwardRef(
   ({ title, helperText, className, ...props }: TProps, ref: ForwardedRef<HTMLInputElement>) => {
     return (
-      <Label className={className}>
-        <Wrapper>
-          <BaseCheckbox ref={ref} type="checkbox" {...props} />
+      <CheckboxLabel className={className}>
+        <CheckboxWrapper>
+          <CheckboxInput ref={ref} type="checkbox" {...props} />
           {Boolean(title) && <Title>{title}</Title>}
-        </Wrapper>
+        </CheckboxWrapper>
         {Boolean(helperText) && <HelperText>{helperText}</HelperText>}
-      </Label>
+      </CheckboxLabel>
     );
   }
 );
-
-export default CheckBox;

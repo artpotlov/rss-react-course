@@ -1,9 +1,7 @@
 import React, { ForwardedRef } from 'react';
-import HelperText from '../HelperText/HelperText';
-import Title from '../Title/Title';
-import BaseRadio from './BaseRadio.styled';
-import Label from './Label.styled';
-import Wrapper from './Wrapper.styled';
+import { HelperText } from '../HelperText/';
+import { Title } from '../Title';
+import { RadioInput, RadioLabel, RadioWrapper } from './Radio.styled';
 
 type TCustomProps = {
   error?: boolean;
@@ -14,17 +12,16 @@ type TCustomProps = {
 
 type TProps = TCustomProps & React.ComponentPropsWithoutRef<'input'>;
 
-const Radio = React.forwardRef(
+export const Radio = React.forwardRef(
   ({ title, helperText, className, ...props }: TProps, ref: ForwardedRef<HTMLInputElement>) => {
     return (
-      <Label className={className}>
-        <Wrapper>
-          <BaseRadio type="radio" ref={ref} {...props} />
+      <RadioLabel className={className}>
+        <RadioWrapper>
+          <RadioInput type="radio" ref={ref} {...props} />
           {Boolean(title) && <Title>{title}</Title>}
-        </Wrapper>
+        </RadioWrapper>
         {Boolean(helperText) && <HelperText>{helperText}</HelperText>}
-      </Label>
+      </RadioLabel>
     );
   }
 );
-export default Radio;

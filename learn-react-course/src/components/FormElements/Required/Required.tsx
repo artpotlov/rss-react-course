@@ -1,8 +1,6 @@
 import React from 'react';
-import Wrapper from './Wrapper.styled';
+import { RequiredWrapper } from './Required.styled';
 
-const Required = (props: React.ComponentPropsWithoutRef<'span'>) => {
-  return <Wrapper {...props}>&nbsp;*</Wrapper>;
+export const Required = (props: React.ComponentPropsWithoutRef<'span'>) => {
+  return <RequiredWrapper {...props}>&nbsp;*</RequiredWrapper>;
 };
-
-export default Required;

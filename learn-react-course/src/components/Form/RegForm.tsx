@@ -1,11 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState } from 'react';
-import TextField from '../FormElements/TextField/TextField';
+import { TextField } from '../FormElements/TextField';
 import { css } from '@emotion/react';
-import { BoxGroup, Date, File, FormCard, Radio, Select } from '../FormElements';
-import CheckBox from '../FormElements/Checkbox/Checkbox';
+import { CheckBox } from '../FormElements/Checkbox';
 import { Button } from '../Button';
-import { CITIES } from '../../constants';
+import { CITIES } from '../../shared/constants';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { TFormStore } from '../../types/types';
 import {
@@ -19,9 +18,19 @@ import {
   isPhoneNumber,
   isRequired,
 } from '../../utils/validation';
-import FormContainer from './FormContainer.styled';
+import { RegFormContainer } from './RegForm.styled';
+import { Date } from '../FormElements/Date';
+import { Select } from '../FormElements/Select';
+import { BoxGroup } from '../FormElements/BoxGroup';
+import { Radio } from '../FormElements/Radio';
+import { File } from '../FormElements/File';
+import { FormCard } from '../FormElements/FormCard';
 
-const RegForm = () => {
+type TProps = {
+  dataTestId?: string;
+};
+
+export const RegForm = ({ dataTestId }: TProps) => {
   const [formStore, setFormStore] = useState<TFormStore[]>([]);
   const {
     register,
@@ -40,7 +49,7 @@ const RegForm = () => {
 
   return (
     <>
-      <FormContainer noValidate data-testid="reg-form" onSubmit={handleSubmit(onSubmit)}>
+      <RegFormContainer noValidate data-testid={dataTestId} onSubmit={handleSubmit(onSubmit)}>
         <TextField
           css={gridFullLength}
           {...register('userName', {
@@ -142,7 +151,7 @@ const RegForm = () => {
         <Button type="submit" disabled={!isValid}>
           Send
         </Button>
-      </FormContainer>
+      </RegFormContainer>
       {formStore.length > 0 && (
         <>
           <h2>Form&apos;s data</h2>
@@ -152,5 +161,3 @@ const RegForm = () => {
     </>
   );
 };
-
-export default RegForm;

@@ -4,15 +4,11 @@ type TProps = {
   dataTestId?: string;
 };
 
-const AboutUsPage: React.FC<TProps> = ({ dataTestId }) => {
+export const AboutUsPage = ({ dataTestId }: TProps) => {
   return (
-    <section data-testid={dataTestId}>
+    <section data-testid={dataTestId || 'about-us-page'}>
       <h1>About us page</h1>
       <p>This is the about us page</p>
     </section>
   );
 };
-
-AboutUsPage.defaultProps = { dataTestId: 'about-us-page' };
-
-export default AboutUsPage;

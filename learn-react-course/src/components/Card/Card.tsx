@@ -1,70 +1,19 @@
 import React, { MouseEventHandler } from 'react';
-import styled from '@emotion/styled';
 import { TProduct } from '../../types/types';
+import { CardCategory, CardImage, CardPrice, CardTitle, CardWrapper } from './Card.styled';
 
 type TProps = {
   dataTestId?: string;
   onClick?: MouseEventHandler<HTMLDivElement>;
 } & Partial<TProduct>;
 
-const Card: React.FC<TProps> = ({ title, category, price, images, dataTestId, onClick }) => {
+export const Card = ({ title, category, price, images, dataTestId, onClick }: TProps) => {
   return (
-    <Wrapper data-testid={dataTestId} onClick={onClick}>
-      <Image src={images && images[0]} alt={title} />
-      <Title>{title}</Title>
-      <Category>{category?.name}</Category>
-      <Price>$ {price}</Price>
-    </Wrapper>
+    <CardWrapper data-testid={dataTestId} onClick={onClick}>
+      <CardImage src={images && images[0]} alt={title} />
+      <CardTitle>{title}</CardTitle>
+      <CardCategory>{category?.name}</CardCategory>
+      <CardPrice>$ {price}</CardPrice>
+    </CardWrapper>
   );
 };
-
-Card.defaultProps = { dataTestId: 'card' };
-
-export default Card;
-
-const Wrapper = styled.div`
-  cursor: ${(p) => (p.onClick ? 'pointer' : 'auto')};
-  width: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1rem;
-  border: 1px solid lavender;
-  border-radius: 1rem;
-  transition: box-shadow 0.2s ease-in-out;
-
-  &:hover {
-    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.05);
-  }
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: 150px;
-  object-fit: contain;
-  object-position: center;
-`;
-
-const Title = styled.span`
-  margin-top: 2rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  height: 3rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  font-weight: bold;
-  overflow: hidden;
-`;
-
-const Category = styled.span`
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: gray;
-`;
-
-const Price = styled.span`
-  margin-top: 1rem;
-  font-size: 1.5rem;
-  line-height: 1.5;
-`;

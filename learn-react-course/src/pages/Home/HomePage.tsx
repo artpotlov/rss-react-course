@@ -1,17 +1,17 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { SearchBar } from '../../components/SearchBar';
 import { CardList } from '../../components/CardList';
-import styled from '@emotion/styled';
 import { TProduct } from '../../types/types';
 import { getAllProducts, getLimitProducts } from '../../utils/api';
 import { Loader } from '../../components/Loader';
 import { AxiosError } from 'axios';
+import { HomePageHeader } from './HomePage.styled';
 
 type TProps = {
   dataTestId?: string;
 };
 
-const HomePage: React.FC<TProps> = ({ dataTestId }) => {
+export const HomePage = ({ dataTestId }: TProps) => {
   const [products, setProducts] = useState<TProduct[]>([]);
   const [searchVal, setSearchVal] = useState('');
   const [loading, setLoading] = useState(true);
@@ -55,23 +55,13 @@ const HomePage: React.FC<TProps> = ({ dataTestId }) => {
   }, []);
 
   return (
-    <section data-testid={dataTestId}>
-      <HeaderContainer>
+    <section data-testid={dataTestId || 'home-page'}>
+      <HomePageHeader>
         <h1>Home Page</h1>
         <SearchBar setValue={setSearchVal} />
-      </HeaderContainer>
+      </HomePageHeader>
       {loading && <Loader />}
       {!loading && <CardList goods={products} />}
     </section>
   );
 };
-
-HomePage.defaultProps = { dataTestId: 'home-page' };
-
-export default HomePage;
-
-const HeaderContainer = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;

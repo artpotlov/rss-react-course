@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { API_URLS } from '../constants';
+import { API_URLS } from '../shared/constants';
 import { TBadResponse, TProduct } from '../types/types';
 
 export const getLimitProducts = async (
