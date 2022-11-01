@@ -7,7 +7,7 @@ describe('Header component tests', () => {
   beforeEach(() => {
     render(
       <MemoryRouter>
-        <Header dataTestId="header" />
+        <Header />
       </MemoryRouter>
     );
   });

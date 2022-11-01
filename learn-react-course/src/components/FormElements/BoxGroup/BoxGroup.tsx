@@ -4,14 +4,14 @@ import React from 'react';
 import { Required } from '../Required';
 import BoxGroupContainer from './BoxGroup.styled';
 
-type TCustomProps = {
+type TProps = {
   title?: string;
   helperText?: string;
   error?: boolean;
   required?: boolean;
-};
-
-type TProps = TCustomProps & React.ComponentPropsWithoutRef<'div'>;
+  className?: string;
+  dataTestId?: string;
+} & React.PropsWithChildren;
 
 export const BoxGroup = ({
   title,
@@ -19,17 +19,17 @@ export const BoxGroup = ({
   required,
   children,
   className,
-  ...props
+  dataTestId = 'box-group',
 }: TProps) => {
   return (
-    <div className={className}>
+    <div data-testid={dataTestId} className={className}>
       {Boolean(title) && (
         <Title>
           {title}
           {required && <Required />}
         </Title>
       )}
-      <BoxGroupContainer {...props}>{children}</BoxGroupContainer>
+      <BoxGroupContainer>{children}</BoxGroupContainer>
       {Boolean(helperText) && <HelperText>{helperText}</HelperText>}
     </div>
   );

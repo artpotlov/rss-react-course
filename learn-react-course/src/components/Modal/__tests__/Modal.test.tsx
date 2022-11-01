@@ -4,7 +4,7 @@ import { Modal } from '../index';
 
 describe('Modal component tests', () => {
   it('modal component is mounted', () => {
-    render(<Modal dataTestId="modal" />);
+    render(<Modal />);
     expect(screen.getByTestId('modal')).toBeInTheDocument();
   });
 });

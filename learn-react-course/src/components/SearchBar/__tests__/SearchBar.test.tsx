@@ -21,7 +21,7 @@ describe('Search bar component tests', () => {
   });
 
   beforeEach(() => {
-    render(<SearchBar dataTestId="search-bar" />);
+    render(<SearchBar />);
   });
 
   it('search bar mounted', () => {

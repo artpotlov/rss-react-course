@@ -5,7 +5,7 @@ import '@testing-library/jest-dom';
 
 describe('Form component test', () => {
   it('form is mounted', () => {
-    render(<RegForm dataTestId="reg-form" />);
+    render(<RegForm />);
     expect(screen.getByTestId('reg-form')).toBeInTheDocument();
   });
 });

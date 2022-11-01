@@ -4,7 +4,7 @@ import { TextField } from '../index';
 
 describe('Text field tests:', () => {
   it('text field is mounted', () => {
-    render(<TextField data-testid="text-field" />);
+    render(<TextField />);
     expect(screen.getByTestId('text-field')).toBeInTheDocument();
   });
 

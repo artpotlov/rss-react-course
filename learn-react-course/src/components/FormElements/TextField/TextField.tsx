@@ -6,22 +6,21 @@ import { TextFieldInput, TextFieldLabel } from './TextField.styled';
 
 type TFieldType = 'text' | 'password' | 'email' | 'tel';
 
-type TCustomProps = {
+type TProps = {
   title?: string;
   helperText?: string;
   error?: boolean;
   type?: TFieldType;
-};
-
-type TProps = TCustomProps & React.ComponentPropsWithoutRef<'input'>;
+  dataTestId?: string;
+} & React.ComponentPropsWithoutRef<'input'>;
 
 export const TextField = React.forwardRef(
   (
-    { title, helperText, className, required, ...props }: TProps,
+    { title, helperText, className, required, dataTestId = 'text-field', ...props }: TProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
-      <TextFieldLabel className={className}>
+      <TextFieldLabel data-testid={dataTestId} className={className}>
         {Boolean(title) && (
           <Title>
             {title}

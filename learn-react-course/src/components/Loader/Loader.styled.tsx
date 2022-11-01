@@ -1,4 +1,4 @@
-import { keyframes } from '@emotion/react/dist/emotion-react.cjs';
+import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 
 const LoaderAnimation = keyframes`

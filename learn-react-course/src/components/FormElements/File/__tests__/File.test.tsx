@@ -4,7 +4,7 @@ import { File } from '../File';
 
 describe('File component tests:', () => {
   it('file component was mounted', () => {
-    render(<File data-testid="file" />);
+    render(<File />);
     expect(screen.getByTestId('file')).toBeInTheDocument();
   });
 

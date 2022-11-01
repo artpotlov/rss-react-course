@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 
 describe('Radio component tests:', () => {
   it('radio  component is mounted', () => {
-    render(<Radio data-testid="radio" />);
+    render(<Radio />);
     expect(screen.getByTestId('radio')).toBeInTheDocument();
   });
 

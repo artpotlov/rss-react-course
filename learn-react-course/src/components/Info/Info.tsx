@@ -14,14 +14,14 @@ type TProps = {
   dataTestId?: string;
 } & Partial<TProduct>;
 
-export const Info: React.FC<TProps> = ({
+export const Info = ({
   title,
   category,
   price,
   description,
   images,
-  dataTestId,
-}) => {
+  dataTestId = 'info',
+}: TProps) => {
   return (
     <InfoContainer data-testid={dataTestId}>
       <InfoImage src={Array.isArray(images) ? images[0] : ''} alt={title} />

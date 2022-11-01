@@ -5,7 +5,7 @@ type TProps = {
   dataTestId?: string;
 };
 
-export const Loader = ({ dataTestId }: TProps) => {
+export const Loader = ({ dataTestId = 'loader' }: TProps) => {
   return (
     <LoaderContainer data-testid={dataTestId}>
       <LoaderIconContainer>

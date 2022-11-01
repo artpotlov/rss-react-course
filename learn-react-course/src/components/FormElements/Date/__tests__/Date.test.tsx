@@ -4,7 +4,7 @@ import { Date } from '../Date';
 
 describe('Date component tests:', () => {
   it('date component was mounted', () => {
-    render(<Date data-testid="date" />);
+    render(<Date />);
     expect(screen.getByTestId('date')).toBeInTheDocument();
   });
 

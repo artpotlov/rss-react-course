@@ -6,7 +6,7 @@ type TProps = {
   dataTestId?: string;
 };
 
-export const App = ({ dataTestId }: TProps) => {
+export const App = ({ dataTestId = 'app' }: TProps) => {
   return (
     <>
       <Header />

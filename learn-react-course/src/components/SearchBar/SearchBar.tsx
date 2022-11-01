@@ -7,7 +7,7 @@ type TProps = {
   onSetValue?: (value: string) => Promise<void>;
 };
 
-export const SearchBar = ({ onSetValue, dataTestId }: TProps) => {
+export const SearchBar = ({ onSetValue, dataTestId = 'search-bar' }: TProps) => {
   const [searchVal, setSearchVal] = useState(getSearchData() || '');
   const searchValRef = useRef(searchVal);
 

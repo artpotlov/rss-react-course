@@ -7,7 +7,7 @@ type TProps = {
   onClick?: MouseEventHandler<HTMLDivElement>;
 } & Partial<TProduct>;
 
-export const Card = ({ title, category, price, images, dataTestId, onClick }: TProps) => {
+export const Card = ({ title, category, price, images, dataTestId = 'card', onClick }: TProps) => {
   return (
     <CardWrapper data-testid={dataTestId} onClick={onClick}>
       <CardImage src={images && images[0]} alt={title} />

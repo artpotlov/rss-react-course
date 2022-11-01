@@ -28,7 +28,7 @@ describe('Home page tests', () => {
   it('the page mounted', async () => {
     await act(() => {
       console.error = jest.fn();
-      render(<HomePage dataTestId="home-page" />);
+      render(<HomePage />);
     });
     expect(screen.getByTestId('home-page')).toBeInTheDocument();
   });

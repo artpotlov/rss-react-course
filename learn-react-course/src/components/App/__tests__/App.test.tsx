@@ -7,7 +7,7 @@ describe('App tests', () => {
   it('render home page', () => {
     render(
       <MemoryRouter>
-        <App dataTestId="app" />
+        <App />
       </MemoryRouter>
     );
     expect(screen.getByTestId('app')).toBeInTheDocument();

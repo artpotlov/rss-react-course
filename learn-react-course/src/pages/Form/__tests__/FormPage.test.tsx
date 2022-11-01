@@ -4,7 +4,7 @@ import { FormPage } from '../index';
 
 describe('Form page tests', () => {
   it('text field is mounted', () => {
-    render(<FormPage dataTestId="form-page" />);
+    render(<FormPage />);
     expect(screen.getByTestId('form-page')).toBeInTheDocument();
   });
 });

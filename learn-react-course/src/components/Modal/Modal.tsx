@@ -9,7 +9,7 @@ type TProps = {
   dataTestId?: string;
 } & React.PropsWithChildren;
 
-export const Modal = ({ setOpen, children, dataTestId, ...props }: TProps) => {
+export const Modal = ({ setOpen, children, dataTestId = 'modal', ...props }: TProps) => {
   const closeModal = () => {
     if (!setOpen) return;
     document.body.style.overflow = '';
@@ -21,8 +21,8 @@ export const Modal = ({ setOpen, children, dataTestId, ...props }: TProps) => {
   document.body.style.paddingRight = '1rem';
 
   return createPortal(
-    <ModalContainer onClick={closeModal}>
-      <ModalWrapper onClick={(e) => e.stopPropagation()} data-testid={dataTestId} {...props}>
+    <ModalContainer data-testid={dataTestId} onClick={closeModal}>
+      <ModalWrapper onClick={(e) => e.stopPropagation()} {...props}>
         <ModalCloseBtn onClick={closeModal}>X</ModalCloseBtn>
         {children}
       </ModalWrapper>

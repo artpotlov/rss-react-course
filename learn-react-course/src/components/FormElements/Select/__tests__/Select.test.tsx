@@ -11,7 +11,7 @@ const options = [
 
 describe('Select component tests:', () => {
   it('select  component is mounted', () => {
-    render(<Select data-testid="select" />);
+    render(<Select />);
     expect(screen.getByTestId('select')).toBeInTheDocument();
   });
 

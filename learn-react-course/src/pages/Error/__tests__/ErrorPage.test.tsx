@@ -7,7 +7,7 @@ describe('Error page tests', () => {
   it('the page mounted', () => {
     render(
       <MemoryRouter>
-        <ErrorPage dataTestId="error-page" />
+        <ErrorPage />
       </MemoryRouter>
     );
     expect(screen.getByTestId('error-page')).toBeInTheDocument();

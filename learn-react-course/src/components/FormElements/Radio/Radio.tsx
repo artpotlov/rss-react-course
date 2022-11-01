@@ -3,19 +3,21 @@ import { HelperText } from '../HelperText/';
 import { Title } from '../Title';
 import { RadioInput, RadioLabel, RadioWrapper } from './Radio.styled';
 
-type TCustomProps = {
+type TProps = {
   error?: boolean;
   type?: 'radio';
   title?: string;
   helperText?: string;
-};
-
-type TProps = TCustomProps & React.ComponentPropsWithoutRef<'input'>;
+  dataTestId?: string;
+} & React.ComponentPropsWithoutRef<'input'>;
 
 export const Radio = React.forwardRef(
-  ({ title, helperText, className, ...props }: TProps, ref: ForwardedRef<HTMLInputElement>) => {
+  (
+    { title, helperText, className, dataTestId = 'radio', ...props }: TProps,
+    ref: ForwardedRef<HTMLInputElement>
+  ) => {
     return (
-      <RadioLabel className={className}>
+      <RadioLabel data-testid={dataTestId} className={className}>
         <RadioWrapper>
           <RadioInput type="radio" ref={ref} {...props} />
           {Boolean(title) && <Title>{title}</Title>}

@@ -4,7 +4,7 @@ import { Required } from '../index';
 
 describe('Required component tests:', () => {
   it('required component is mounted', () => {
-    render(<Required data-testid="required" />);
+    render(<Required />);
     expect(screen.getByTestId('required')).toBeInTheDocument();
   });
 });

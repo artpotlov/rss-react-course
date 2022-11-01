@@ -4,7 +4,7 @@ import { Loader } from '../index';
 
 describe('Loader component tests', () => {
   it('loader component is mounted', () => {
-    render(<Loader dataTestId="loader" />);
+    render(<Loader />);
     expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
 });

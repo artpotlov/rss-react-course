@@ -30,7 +30,7 @@ type TProps = {
   dataTestId?: string;
 };
 
-export const RegForm = ({ dataTestId }: TProps) => {
+export const RegForm = ({ dataTestId = 'reg-form' }: TProps) => {
   const [formStore, setFormStore] = useState<TFormStore[]>([]);
   const {
     register,

@@ -19,13 +19,7 @@ const data: TProduct = {
 describe('Card tests', () => {
   beforeEach(() => {
     render(
-      <Card
-        dataTestId="card"
-        title={data.title}
-        price={data.price}
-        category={data.category}
-        images={data.images}
-      />
+      <Card title={data.title} price={data.price} category={data.category} images={data.images} />
     );
   });
 

@@ -4,25 +4,24 @@ import { HelperText } from '../HelperText';
 import { Required } from '../Required';
 import { SelectElement, SelectWrapper } from './Select.styled';
 
-type TCustomProps = {
+type TProps = {
   error?: boolean;
   title?: string;
   helperText?: string;
+  dataTestId?: string;
   options?: {
     value: string | number;
     title: string;
   }[];
-};
-
-type TProps = TCustomProps & React.ComponentPropsWithoutRef<'select'>;
+} & React.ComponentPropsWithoutRef<'select'>;
 
 export const Select = React.forwardRef(
   (
-    { title, helperText, options, className, ...props }: TProps,
+    { title, helperText, options, className, dataTestId = 'select', ...props }: TProps,
     ref: ForwardedRef<HTMLSelectElement>
   ) => {
     return (
-      <SelectWrapper className={className}>
+      <SelectWrapper data-testid={dataTestId} className={className}>
         {Boolean(title) && (
           <Title>
             {title}

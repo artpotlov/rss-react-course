@@ -4,7 +4,7 @@ import { BoxGroup } from '../index';
 
 describe('Box group tests', () => {
   it('box group component was mounted', () => {
-    render(<BoxGroup data-testid="box-group" />);
+    render(<BoxGroup />);
     expect(screen.getByTestId('box-group')).toBeInTheDocument();
   });
 

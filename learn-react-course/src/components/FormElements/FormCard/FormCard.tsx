@@ -4,11 +4,12 @@ import { FormCardItem, FormCardItems, FormCardWrapper } from './FormCard.styled'
 
 type TProps = {
   cards?: TFormStore[];
-} & React.ComponentPropsWithoutRef<'div'>;
+  dataTestId?: string;
+};
 
-export const FormCard = ({ cards, className, ...props }: TProps) => {
+export const FormCard = ({ cards, dataTestId = 'form-card' }: TProps) => {
   return (
-    <FormCardWrapper className={className} {...props}>
+    <FormCardWrapper data-testid={dataTestId}>
       {cards?.map((card, index) => {
         return (
           <FormCardItems key={index}>

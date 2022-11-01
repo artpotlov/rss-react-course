@@ -4,19 +4,21 @@ import { HelperText } from '../HelperText';
 import { Required } from '../Required';
 import { DateInput, DateLabel } from './Date.styled';
 
-type TCustomProps = {
+type TProps = {
   title?: string;
   helperText?: string;
   error?: boolean;
   type?: 'date';
-};
-
-type TProps = TCustomProps & React.ComponentProps<'input'>;
+  dataTestId?: string;
+} & React.ComponentPropsWithoutRef<'input'>;
 
 export const Date = React.forwardRef(
-  ({ title, helperText, className, ...props }: TProps, ref: ForwardedRef<HTMLInputElement>) => {
+  (
+    { title, helperText, className, dataTestId = 'date', ...props }: TProps,
+    ref: ForwardedRef<HTMLInputElement>
+  ) => {
     return (
-      <DateLabel className={className}>
+      <DateLabel data-testid={dataTestId} className={className}>
         {Boolean(title) && (
           <Title>
             {title}

@@ -4,7 +4,7 @@ import { CheckBox } from '../index';
 
 describe('Checkbox tests:', () => {
   it('checkbox component was mounted', () => {
-    render(<CheckBox data-testid="checkbox" />);
+    render(<CheckBox />);
     expect(screen.getByTestId('checkbox')).toBeInTheDocument();
   });
 

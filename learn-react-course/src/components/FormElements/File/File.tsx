@@ -4,19 +4,21 @@ import { HelperText } from '../HelperText';
 import { Required } from '../Required';
 import { FileInput, FileLabel } from './File.styled';
 
-type TCustomProps = {
+type TProps = {
   title?: string;
   helperText?: string;
   error?: boolean;
   type?: 'file';
-};
-
-type TProps = TCustomProps & React.ComponentPropsWithoutRef<'input'>;
+  dataTestId?: string;
+} & React.ComponentPropsWithoutRef<'input'>;
 
 export const File = React.forwardRef(
-  ({ title, helperText, className, ...props }: TProps, ref: ForwardedRef<HTMLInputElement>) => {
+  (
+    { title, helperText, className, dataTestId = 'file', ...props }: TProps,
+    ref: ForwardedRef<HTMLInputElement>
+  ) => {
     return (
-      <FileLabel className={className}>
+      <FileLabel data-testid={dataTestId} className={className}>
         {Boolean(title) && (
           <Title>
             {title}

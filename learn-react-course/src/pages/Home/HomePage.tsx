@@ -10,7 +10,7 @@ type TProps = {
   dataTestId?: string;
 };
 
-export const HomePage = ({ dataTestId }: TProps) => {
+export const HomePage = ({ dataTestId = 'home-page' }: TProps) => {
   const [products, setProducts] = useState<TProduct[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -46,7 +46,7 @@ export const HomePage = ({ dataTestId }: TProps) => {
   }, []);
 
   return (
-    <section data-testid={dataTestId || 'home-page'}>
+    <section data-testid={dataTestId}>
       <HomePageHeader>
         <h1>Home Page</h1>
         <SearchBar onSetValue={handleKeyUpEnter} />
