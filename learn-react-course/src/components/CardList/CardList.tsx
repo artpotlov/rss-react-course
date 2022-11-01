@@ -14,23 +14,43 @@ type TProps = {
 export const CardList = ({ goods, dataTestId = 'card-list' }: TProps) => {
   const [isShowModal, setShowModal] = useState(false);
   const [fullCardData, setFullCardData] = useState<Partial<TProduct>>({});
+  const products = goods || [];
+
+  const toggleModal = (state: 'open' | 'close') => {
+    if (state === 'open') {
+      setShowModal(true);
+    }
+
+    if (state === 'close') {
+      setShowModal(false);
+    }
+  };
+
   const clickToCard = async (id: number) => {
-    setShowModal(false);
+    toggleModal('close');
     const response = await getProductByID(id);
     if (!response || !('title' in response.data)) return;
     setFullCardData(response.data);
-    setShowModal(true);
+    toggleModal('open');
   };
+
   return (
     <>
       {isShowModal && (
-        <Modal width={700} height={400} setOpen={setShowModal}>
-          <Info {...fullCardData} />
+        <Modal width={700} height={300} setShowModal={toggleModal}>
+          <Info
+            id={fullCardData.id}
+            title={fullCardData.title}
+            price={fullCardData.price}
+            category={fullCardData.category}
+            images={fullCardData.images}
+            description={fullCardData.description}
+          />
         </Modal>
       )}
       <CardListWrapper data-testid={dataTestId}>
-        {Boolean(goods?.length) &&
-          goods?.map(({ id, title, price, category, images }) => (
+        {Boolean(products.length) &&
+          products.map(({ id, title, price, category, images }) => (
             <Card
               key={id}
               title={title}
@@ -40,7 +60,7 @@ export const CardList = ({ goods, dataTestId = 'card-list' }: TProps) => {
               onClick={() => clickToCard(id)}
             />
           ))}
-        {!Boolean(goods?.length) && <div>☹️ Products are not found...</div>}
+        {!Boolean(products.length) && <div>☹️ Products are not found...</div>}
       </CardListWrapper>
     </>
   );

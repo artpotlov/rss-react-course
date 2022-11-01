@@ -3,18 +3,18 @@ import { createPortal } from 'react-dom';
 import { ModalCloseBtn, ModalContainer, ModalWrapper } from './Modal.styled';
 
 type TProps = {
-  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowModal?: (state: 'open' | 'close') => void;
   width?: number;
   height?: number;
   dataTestId?: string;
 } & React.PropsWithChildren;
 
-export const Modal = ({ setOpen, children, dataTestId = 'modal', ...props }: TProps) => {
+export const Modal = ({ setShowModal, children, dataTestId = 'modal', width, height }: TProps) => {
   const closeModal = () => {
-    if (!setOpen) return;
+    if (!setShowModal) return;
     document.body.style.overflow = '';
     document.body.style.paddingRight = '';
-    setOpen(false);
+    setShowModal('close');
   };
 
   document.body.style.overflow = 'hidden';
@@ -22,7 +22,7 @@ export const Modal = ({ setOpen, children, dataTestId = 'modal', ...props }: TPr
 
   return createPortal(
     <ModalContainer data-testid={dataTestId} onClick={closeModal}>
-      <ModalWrapper onClick={(e) => e.stopPropagation()} {...props}>
+      <ModalWrapper onClick={(e) => e.stopPropagation()} width={width} height={height}>
         <ModalCloseBtn onClick={closeModal}>X</ModalCloseBtn>
         {children}
       </ModalWrapper>
