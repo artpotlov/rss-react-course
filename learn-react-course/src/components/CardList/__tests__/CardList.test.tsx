@@ -32,7 +32,7 @@ const fakeGoods: TProduct[] = [
 
 describe('Card list tests', () => {
   beforeEach(() => {
-    render(<CardList dataTestId="card-list" goods={fakeGoods} />);
+    render(<CardList goods={fakeGoods} />);
   });
 
   it('card list mounted', () => {

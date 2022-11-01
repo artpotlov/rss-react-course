@@ -1,5 +1,5 @@
 import React from 'react';
-import { AxiosError } from 'axios';
+import { AxiosResponse } from 'axios';
 import { act, render, screen } from '@testing-library/react';
 import { HomePage } from '../index';
 import { TProduct } from '../../../types/types';
@@ -35,7 +35,8 @@ describe('Home page tests', () => {
 
   it('when the server returned a empty data there should be this text - products are not found', async () => {
     await act(() => {
-      getLimitProductsMock.mockResolvedValueOnce([]);
+      const mock = Promise.resolve({ status: 200, data: [] } as AxiosResponse);
+      getLimitProductsMock.mockResolvedValueOnce(mock);
       render(<HomePage />);
     });
     expect(screen.getByText(/Products are not found/i)).toBeInTheDocument();
@@ -43,8 +44,9 @@ describe('Home page tests', () => {
 
   it('when a user entered a text into search box and the server returned empty data there should be this text - products are no found', async () => {
     await act(() => {
-      getLimitProductsMock.mockResolvedValueOnce([]);
-      getAllProductsMock.mockResolvedValue([]);
+      const mock = Promise.resolve({ status: 200, data: [] } as AxiosResponse);
+      getLimitProductsMock.mockResolvedValueOnce(mock);
+      getAllProductsMock.mockResolvedValueOnce(mock);
       render(<HomePage />);
     });
     const searchBox = screen.getByRole('searchbox');
@@ -54,7 +56,8 @@ describe('Home page tests', () => {
 
   it('when the server returned the data there should be a card with this title text - Title 1', async () => {
     await act(() => {
-      getLimitProductsMock.mockResolvedValue(mockData);
+      const mock = Promise.resolve({ status: 200, data: mockData } as AxiosResponse);
+      getLimitProductsMock.mockResolvedValueOnce(mock);
       render(<HomePage />);
     });
     expect(screen.getByText(/Title 1/i)).toBeInTheDocument();
@@ -62,23 +65,13 @@ describe('Home page tests', () => {
 
   it('when a user enter a text into search box and the server returned the data there should be this title text - Title 1', async () => {
     await act(() => {
-      getLimitProductsMock.mockResolvedValueOnce(mockData);
-      getAllProductsMock.mockResolvedValue(mockData);
+      const mock = Promise.resolve({ status: 200, data: mockData } as AxiosResponse);
+      getLimitProductsMock.mockResolvedValueOnce(mock);
+      getAllProductsMock.mockResolvedValueOnce(mock);
       render(<HomePage />);
     });
     const searchBox = screen.getByRole('searchbox');
     await userEvent.paste(searchBox, 'Title');
     expect(screen.getByText(/Title 1/i)).toBeInTheDocument();
-  });
-
-  it('when the server returned error there should be console.error called', async () => {
-    await act(() => {
-      console.error = jest.fn();
-      getAllProductsMock.mockRejectedValueOnce(new AxiosError());
-      getLimitProductsMock.mockRejectedValueOnce(new AxiosError());
-      render(<HomePage />);
-    });
-    expect(console.error).toBeCalled();
-    expect(console.error).toHaveBeenCalledTimes(2);
   });
 });

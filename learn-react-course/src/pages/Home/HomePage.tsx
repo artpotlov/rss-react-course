@@ -1,10 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SearchBar } from '../../components/SearchBar';
 import { CardList } from '../../components/CardList';
 import { TProduct } from '../../types/types';
 import { getAllProducts, getLimitProducts } from '../../utils/api';
 import { Loader } from '../../components/Loader';
-import { AxiosError } from 'axios';
 import { HomePageHeader } from './HomePage.styled';
 
 type TProps = {
@@ -13,55 +12,46 @@ type TProps = {
 
 export const HomePage = ({ dataTestId }: TProps) => {
   const [products, setProducts] = useState<TProduct[]>([]);
-  const [searchVal, setSearchVal] = useState('');
   const [loading, setLoading] = useState(true);
 
-  const productsRemote = useMemo(async () => await getAllProducts(), []);
+  const handleKeyUpEnter = async (searchVal: string) => {
+    setLoading(true);
+
+    const response = await getAllProducts();
+    if (!response || !Array.isArray(response.data)) return;
+    const products = response.data;
+
+    const filteringData = products.filter((product) =>
+      product.title.toLowerCase().includes(searchVal.toLowerCase())
+    );
+
+    if (searchVal.length === 0) {
+      filteringData.splice(20);
+    }
+
+    setProducts(filteringData);
+    setLoading(false);
+  };
 
   useEffect(() => {
-    (async () => {
-      try {
-        setLoading(true);
-        const products = await productsRemote;
-        const filteringData = products.filter((product) =>
-          product.title.toLowerCase().includes(searchVal.toLowerCase())
-        );
-        if (searchVal.length === 0) {
-          filteringData.splice(20);
-        }
-        setProducts(filteringData);
-        setLoading(false);
-      } catch (error) {
-        if (error instanceof AxiosError) {
-          console.error(error.message);
-        }
-      }
-    })();
-  }, [searchVal, productsRemote]);
+    const getRequest = async () => {
+      setLoading(true);
+      const response = await getLimitProducts();
+      if (!response || !Array.isArray(response.data)) return;
+      setProducts(response.data);
+      setLoading(false);
+    };
 
-  useEffect(() => {
-    (async () => {
-      try {
-        setLoading(true);
-        const products = await getLimitProducts();
-        setProducts(products);
-        setLoading(false);
-      } catch (error) {
-        if (error instanceof AxiosError) {
-          console.error(error.message);
-        }
-      }
-    })();
+    getRequest().then();
   }, []);
 
   return (
     <section data-testid={dataTestId || 'home-page'}>
       <HomePageHeader>
         <h1>Home Page</h1>
-        <SearchBar setValue={setSearchVal} />
+        <SearchBar onSetValue={handleKeyUpEnter} />
       </HomePageHeader>
-      {loading && <Loader />}
-      {!loading && <CardList goods={products} />}
+      {loading ? <Loader /> : <CardList goods={products} />}
     </section>
   );
 };

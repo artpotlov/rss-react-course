@@ -1,11 +1,11 @@
 import React from 'react';
 import { routes } from './routes';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
-import App from '../components/App/App';
+import { App } from '../components/App';
 import { ErrorPage } from '../pages/Error';
 import { AboutUsPage } from '../pages/AboutUs';
 import { HomePage } from '../pages/Home';
-import FormPage from '../pages/Form/FormPage';
+import { FormPage } from '../pages/Form';
 
 export const routerConfig: RouteObject[] = [
   {

@@ -4,10 +4,10 @@ import { SearchInput } from './SearchBar.styled';
 
 type TProps = {
   dataTestId?: string;
-  setValue?: React.Dispatch<React.SetStateAction<string>>;
+  onSetValue?: (value: string) => Promise<void>;
 };
 
-export const SearchBar = ({ setValue, dataTestId }: TProps) => {
+export const SearchBar = ({ onSetValue, dataTestId }: TProps) => {
   const [searchVal, setSearchVal] = useState(getSearchData() || '');
   const searchValRef = useRef(searchVal);
 
@@ -27,8 +27,8 @@ export const SearchBar = ({ setValue, dataTestId }: TProps) => {
   };
 
   const onInputEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!(event.target instanceof HTMLInputElement && event.key === 'Enter') || !setValue) return;
-    setValue(event.target.value.trim());
+    if (!(event.target instanceof HTMLInputElement && event.key === 'Enter') || !onSetValue) return;
+    onSetValue(event.target.value.trim());
   };
 
   return (
