@@ -1,6 +1,6 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import { ModalCloseBtn, ModalContainer, ModalWrapper } from './Modal.styled';
+import { ModalBack, ModalCloseBtn, ModalWrapper } from './Modal.styled';
 
 type TProps = {
   setShowModal?: (state: 'open' | 'close') => void;
@@ -21,12 +21,13 @@ export const Modal = ({ setShowModal, children, dataTestId = 'modal', width, hei
   document.body.style.paddingRight = '1rem';
 
   return createPortal(
-    <ModalContainer data-testid={dataTestId} onClick={closeModal}>
-      <ModalWrapper onClick={(e) => e.stopPropagation()} width={width} height={height}>
+    <>
+      <ModalBack data-testid={dataTestId} onClick={closeModal} />
+      <ModalWrapper width={width} height={height}>
         <ModalCloseBtn onClick={closeModal}>X</ModalCloseBtn>
         {children}
       </ModalWrapper>
-    </ModalContainer>,
+    </>,
     document.body
   );
 };
