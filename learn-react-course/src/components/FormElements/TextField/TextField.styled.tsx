@@ -5,11 +5,11 @@ type TProps = {
 };
 
 export const TextFieldInput = styled.input<TProps>`
-  margin-top: 8px;
   height: 58px;
+  margin-top: 8px;
+  padding: 8px 16px;
   border: 1px solid ${(p) => (p.error ? '#f57e77' : '#cfd3d5')};
   border-radius: 8px;
-  padding: 8px 16px;
   font-size: 16px;
   line-height: 1;
   outline: none;

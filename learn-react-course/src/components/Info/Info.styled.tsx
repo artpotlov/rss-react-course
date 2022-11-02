@@ -1,18 +1,18 @@
 import styled from '@emotion/styled';
 
 export const InfoContainer = styled.div`
-  display: flex;
   height: 100%;
-  gap: 16px;
   padding: 32px;
+  display: flex;
+  gap: 16px;
   align-items: center;
 `;
 
 export const InfoTextWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
   justify-content: center;
+  gap: 8px;
 `;
 
 export const InfoImage = styled.img`

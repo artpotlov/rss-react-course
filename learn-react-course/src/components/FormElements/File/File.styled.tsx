@@ -5,12 +5,12 @@ type TProps = {
 };
 
 export const FileInput = styled.input<TProps>`
-  margin-top: 8px;
   height: 40px;
-  border-radius: 8px;
+  margin-top: 8px;
   padding: 8px;
-  outline: none;
   border: 1px solid ${(p) => (p.error ? '#f57e77' : '#cfd3d5')};
+  border-radius: 8px;
+  outline: none;
 
   &:focus {
     border: 1px solid #5570f1;

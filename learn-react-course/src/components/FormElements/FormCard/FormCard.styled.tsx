@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
 
 export const FormCardItems = styled.ul`
-  margin: 0;
   width: 300px;
+  margin: 0;
   padding: 32px;
+  border: 1px solid #cfd3d5;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  border: 1px solid #cfd3d5;
-  border-radius: 16px;
 `;
 
 export const FormCardItem = styled.li`

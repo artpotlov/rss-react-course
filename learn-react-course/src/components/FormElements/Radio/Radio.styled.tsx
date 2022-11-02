@@ -8,22 +8,22 @@ export const RadioInput = styled.input<TProps>`
   appearance: none;
   width: 24px;
   height: 24px;
-  border: 1px solid ${(p) => (p.error ? '#f57e77' : '#cfd3d5')};
-  transition: border 0.2s ease-in-out;
-  border-radius: 9999px;
   position: relative;
+  border: 1px solid ${(p) => (p.error ? '#f57e77' : '#cfd3d5')};
+  border-radius: 9999px;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: border 0.2s ease-in-out;
 
   &::before {
     content: '';
-    display: block;
     width: 16px;
     height: 16px;
-    background-color: #5570f1;
     border-radius: 9999px;
+    background-color: #5570f1;
     opacity: 0;
+    display: block;
     transition: opacity 0.2s ease-in-out;
   }
 

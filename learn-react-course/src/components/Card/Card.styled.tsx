@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
 
 export const CardWrapper = styled.div`
-  cursor: ${(p) => (p.onClick ? 'pointer' : 'auto')};
   width: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   padding: 1rem;
   border: 1px solid lavender;
   border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: ${(p) => (p.onClick ? 'pointer' : 'auto')};
   transition: box-shadow 0.2s ease-in-out;
 
   &:hover {
@@ -24,11 +24,11 @@ export const CardImage = styled.img`
 `;
 
 export const CardTitle = styled.span`
+  height: 3rem;
   margin-top: 2rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  height: 3rem;
   font-size: 1rem;
   line-height: 1.5;
   font-weight: bold;

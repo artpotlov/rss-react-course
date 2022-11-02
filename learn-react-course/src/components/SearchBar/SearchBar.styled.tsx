@@ -2,9 +2,9 @@ import styled from '@emotion/styled';
 
 export const SearchInput = styled.input`
   height: 58px;
+  padding: 8px 16px;
   border: 1px solid #cfd3d5;
   border-radius: 8px;
-  padding: 8px 16px;
   font-size: 16px;
   line-height: 1;
   outline: none;

@@ -9,12 +9,12 @@ export const CheckboxInput = styled.input<TProps>`
   width: 24px;
   height: 24px;
   border: 1px solid ${(p) => (p.error ? '#f57e77' : '#cfd3d5')};
-  transition: background-color 0.2s ease-in-out;
   border-radius: 8px;
+  transition: background-color 0.2s ease-in-out;
 
   &:checked {
-    background-color: #5570f1;
     border: 1px solid #5570f1;
+    background-color: #5570f1;
   }
 `;
 
