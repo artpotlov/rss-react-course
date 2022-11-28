@@ -7,6 +7,10 @@ export const HEADER_LINKS: THeaderLinks[] = [
     path: routes.main,
   },
   {
+    name: 'Products',
+    path: routes.products,
+  },
+  {
     name: 'About us',
     path: routes.aboutUs,
   },
@@ -31,7 +35,28 @@ export const CITIES: TCity[] = [
   },
 ];
 
+export const SORTING_VALS = [
+  {
+    value: 'ascPrice',
+    name: 'Ascending price',
+  },
+  {
+    value: 'descPrice',
+    name: 'Descending price',
+  },
+  {
+    value: 'ascName',
+    name: 'Ascending name',
+  },
+  {
+    value: 'descName',
+    name: 'Descending name',
+  },
+];
+
 export const API_URLS = {
   main: 'https://api.escuelajs.co/api/v1',
   products: 'https://api.escuelajs.co/api/v1/products',
 };
+
+export const TOTAL_PAGES = 10;

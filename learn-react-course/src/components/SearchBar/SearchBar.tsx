@@ -1,27 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { getSearchData, saveSearchData } from '../../utils/local-storage';
 import { SearchInput } from './SearchBar.styled';
+import { ProductContext } from '../../context/ProductContext/product-context';
 
 type TProps = {
   dataTestId?: string;
-  onSetValue?: (value: string) => Promise<void>;
 };
 
-export const SearchBar = ({ onSetValue, dataTestId = 'search-bar' }: TProps) => {
+export const SearchBar = ({ dataTestId = 'search-bar' }: TProps) => {
+  const { onHandleKeyUpEnter } = React.useContext(ProductContext);
   const [searchVal, setSearchVal] = useState('');
 
   const onHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!(event.target instanceof HTMLInputElement)) return;
 
-    const searchValue = event.target.value.trim();
+    const searchValue = event.target.value;
 
     setSearchVal(searchValue);
-    saveSearchData(searchValue);
+    saveSearchData(searchValue.trim());
   };
 
   const onInputEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!(event.target instanceof HTMLInputElement && event.key === 'Enter') || !onSetValue) return;
-    onSetValue(event.target.value.trim()).then();
+    if (
+      !(event.target instanceof HTMLInputElement && event.key === 'Enter') ||
+      !onHandleKeyUpEnter
+    ) {
+      return;
+    }
+    onHandleKeyUpEnter(event.target.value.trim()).then();
   };
 
   useEffect(() => {

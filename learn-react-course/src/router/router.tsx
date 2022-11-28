@@ -6,6 +6,8 @@ import { ErrorPage } from '../pages/Error';
 import { AboutUsPage } from '../pages/AboutUs';
 import { HomePage } from '../pages/Home';
 import { FormPage } from '../pages/Form';
+import { ProductPage } from '../pages/Product';
+import { SingleProductProvider } from '../context/SingleProductContext/SingleProductProvider';
 
 export const routerConfig: RouteObject[] = [
   {
@@ -24,6 +26,18 @@ export const routerConfig: RouteObject[] = [
       {
         path: routes.form,
         element: <FormPage />,
+      },
+      {
+        path: routes.products,
+        element: <HomePage title="Products" />,
+      },
+      {
+        path: routes.products + '/:id',
+        element: (
+          <SingleProductProvider>
+            <ProductPage />
+          </SingleProductProvider>
+        ),
       },
     ],
   },

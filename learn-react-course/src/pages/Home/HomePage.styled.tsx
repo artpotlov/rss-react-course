@@ -5,3 +5,8 @@ export const HomePageHeader = styled.header`
   justify-content: space-between;
   align-items: center;
 `;
+
+export const HomePageWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+`;
