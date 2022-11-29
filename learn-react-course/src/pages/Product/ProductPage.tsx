@@ -1,15 +1,26 @@
-import React, { useContext } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Navigate, useParams } from 'react-router-dom';
 import { Loader } from '../../components/Loader';
 import { Product } from '../../components/Product';
 import { routes } from '../../router/routes';
-import { SingleProductContext } from '../../context/SingleProductContext/sproduct-context';
 import { ProductPageContainer, ProductPageLink } from './ProductPage.styled';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { getSingleProduct } from '../../store/thunks/Thunks';
 
 export const ProductPage = () => {
-  const { productState } = useContext(SingleProductContext);
-  const product = productState?.product || null;
-  return productState?.loading ? (
+  const { product, isLoading } = useAppSelector((state) => state.productReducer);
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+
+    dispatch(getSingleProduct(id));
+  }, [id, dispatch]);
+
+  return isLoading ? (
     <Loader />
   ) : (
     <ProductPageContainer>

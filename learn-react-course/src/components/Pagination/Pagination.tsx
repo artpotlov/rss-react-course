@@ -1,44 +1,30 @@
 import React from 'react';
-import { ProductContext } from '../../context/ProductContext/product-context';
 import { PaginationButton, PaginationContainer, PaginationPage } from './Pagination.styled';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { productsActions } from '../../store/slices/ProductsSlice';
 
 export const Pagination = () => {
-  const { currentPage, totalPages, onHandleTogglePage } = React.useContext(ProductContext);
+  const { currentPage, totalPages } = useAppSelector((state) => state.productsReducer);
+  const { getPrevPage, getNextPage } = productsActions;
+  const dispatch = useAppDispatch();
 
   const onHandleClickPrev = () => {
-    return onHandleTogglePage ? onHandleTogglePage('prev') : null;
+    dispatch(getPrevPage());
   };
 
   const onHandleClickNext = () => {
-    return onHandleTogglePage ? onHandleTogglePage('next') : null;
-  };
-
-  const setDisableButton = (
-    numPage: number | undefined,
-    type: 'prev' | 'next',
-    totalPages = 10
-  ) => {
-    if (!numPage) {
-      return true;
-    }
-    return (type === 'prev' && numPage <= 1) || (type === 'next' && numPage >= totalPages);
+    dispatch(getNextPage());
   };
 
   return (
     <PaginationContainer>
-      <PaginationButton
-        onClick={onHandleClickPrev}
-        disabled={setDisableButton(currentPage, 'prev')}
-      >
+      <PaginationButton onClick={onHandleClickPrev} disabled={currentPage <= 1}>
         Prev
       </PaginationButton>
       <PaginationPage>
         {currentPage} / {totalPages}
       </PaginationPage>
-      <PaginationButton
-        onClick={onHandleClickNext}
-        disabled={setDisableButton(currentPage, 'next')}
-      >
+      <PaginationButton onClick={onHandleClickNext} disabled={currentPage >= totalPages}>
         Next
       </PaginationButton>
     </PaginationContainer>

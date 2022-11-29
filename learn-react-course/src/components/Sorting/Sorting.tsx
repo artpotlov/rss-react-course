@@ -1,23 +1,26 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { SortingSelect, SortingWrapper } from './Sorting.styled';
 import { SORTING_VALS } from '../../shared/constants';
-import { ProductContext } from '../../context/ProductContext/product-context';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { productsActions } from '../../store/slices/ProductsSlice';
 
 export const Sorting = () => {
-  const { productSorting, onHandleToggleSort } = useContext(ProductContext);
+  const { currentSortType } = useAppSelector((state) => state.productsReducer);
+  const dispatch = useAppDispatch();
+  const { changeSortType } = productsActions;
 
   const onHandleClickOption = (target: EventTarget) => {
-    if (!onHandleToggleSort || !(target instanceof HTMLSelectElement)) {
+    if (!(target instanceof HTMLSelectElement)) {
       return;
     }
 
-    onHandleToggleSort(target.value);
+    dispatch(changeSortType(target.value));
   };
 
   return (
     <SortingWrapper>
       <SortingSelect
-        defaultValue={productSorting}
+        defaultValue={currentSortType}
         onInput={({ target }) => onHandleClickOption(target)}
       >
         <option value="#" disabled>

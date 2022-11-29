@@ -23,7 +23,7 @@ export const SingleProductProvider = ({ children }: TProps) => {
       }
 
       if ('error' in response.data) {
-        productDispatch({ type: 'ERROR', payload: { error: response.data.message } });
+        productDispatch({ type: 'ERROR', payload: { error: 'Bad request' } });
         return;
       }
 
