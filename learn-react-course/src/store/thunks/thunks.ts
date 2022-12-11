@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getAllProducts, getLimitProducts, getProductByID } from '../../utils/api';
 import { handleError } from '../../utils/handleError';
+import { TProduct } from '../../types/types';
 
-export const getSingleProduct = createAsyncThunk(
+export const getSingleProduct = createAsyncThunk<TProduct, string, { rejectValue: string }>(
   'product/getSingleProduct',
   async (id: string, thunkAPI) => {
     try {
@@ -14,7 +15,7 @@ export const getSingleProduct = createAsyncThunk(
   }
 );
 
-export const getProductsByPage = createAsyncThunk(
+export const getProductsByPage = createAsyncThunk<TProduct[], number, { rejectValue: string }>(
   'product/getProductsByPage',
   async (pageNum: number, thunkAPI) => {
     try {
@@ -27,20 +28,16 @@ export const getProductsByPage = createAsyncThunk(
   }
 );
 
-export const getProductsBySearchVal = createAsyncThunk(
+export const getProductsBySearchVal = createAsyncThunk<TProduct[], string, { rejectValue: string }>(
   'products/getProductsBySearchVal',
   async (searchString: string, thunkAPI) => {
     try {
       const response = await getAllProducts();
       const products = response.data;
-      const filteringProducts = products.filter((product) =>
+
+      return products.filter((product) =>
         product.title.toLowerCase().includes(searchString.toLowerCase())
       );
-      if (filteringProducts.length === 0) {
-        return thunkAPI.rejectWithValue('Nothing found');
-      }
-
-      return filteringProducts;
     } catch (e) {
       return thunkAPI.rejectWithValue(handleError(e));
     }

@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { getSearchData, saveSearchData } from '../../utils/local-storage';
 import { SearchInput } from './SearchBar.styled';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getProductsByPage, getProductsBySearchVal } from '../../store/thunks/Thunks';
+import { getProductsByPage, getProductsBySearchVal } from '../../store/thunks/thunks';
+import { selectProducts } from '../../store/selectors/products';
 
 type TProps = {
   dataTestId?: string;
 };
 
 export const SearchBar = ({ dataTestId = 'search-bar' }: TProps) => {
-  const { currentPage } = useAppSelector((state) => state.productsReducer);
+  const { currentPage } = useAppSelector(selectProducts);
   const dispatch = useAppDispatch();
   const [searchVal, setSearchVal] = useState('');
 

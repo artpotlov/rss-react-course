@@ -1,19 +1,20 @@
 import React from 'react';
 import { PaginationButton, PaginationContainer, PaginationPage } from './Pagination.styled';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { productsActions } from '../../store/slices/ProductsSlice';
+import { productsActions } from '../../store/slices/products/products.slice';
+import { selectProducts } from '../../store/selectors/products';
 
 export const Pagination = () => {
-  const { currentPage, totalPages } = useAppSelector((state) => state.productsReducer);
-  const { getPrevPage, getNextPage } = productsActions;
+  const { currentPage, totalPages } = useAppSelector(selectProducts);
+  const { setPrevPage, setNextPage } = productsActions;
   const dispatch = useAppDispatch();
 
   const onHandleClickPrev = () => {
-    dispatch(getPrevPage());
+    dispatch(setPrevPage());
   };
 
   const onHandleClickNext = () => {
-    dispatch(getNextPage());
+    dispatch(setNextPage());
   };
 
   return (

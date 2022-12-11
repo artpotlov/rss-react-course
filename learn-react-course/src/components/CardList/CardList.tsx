@@ -5,18 +5,17 @@ import { Loader } from '../Loader';
 import { routes } from '../../router/routes';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getProductsByPage } from '../../store/thunks/Thunks';
+import { getProductsByPage } from '../../store/thunks/thunks';
 import { Pagination } from '../Pagination';
-import { productsActions } from '../../store/slices/ProductsSlice';
+import { selectProducts } from '../../store/selectors/products';
 
 type TProps = {
   dataTestId?: string;
 };
 
 export const CardList = ({ dataTestId = 'card-list' }: TProps) => {
-  const { products, isLoading, errorMessage, currentPage, currentSortType, isSearching } =
-    useAppSelector((state) => state.productsReducer);
-  const { sortBy } = productsActions;
+  const { products, isLoading, errorMessage, currentPage, isSearching } =
+    useAppSelector(selectProducts);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -27,10 +26,6 @@ export const CardList = ({ dataTestId = 'card-list' }: TProps) => {
   useEffect(() => {
     dispatch(getProductsByPage(currentPage));
   }, [currentPage, dispatch]);
-
-  useEffect(() => {
-    dispatch(sortBy(currentSortType));
-  }, [currentSortType, products, dispatch, sortBy]);
 
   return isLoading ? (
     <Loader />

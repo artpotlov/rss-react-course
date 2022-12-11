@@ -2,10 +2,11 @@ import React from 'react';
 import { SortingSelect, SortingWrapper } from './Sorting.styled';
 import { SORTING_VALS } from '../../shared/constants';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { productsActions } from '../../store/slices/ProductsSlice';
+import { productsActions } from '../../store/slices/products/products.slice';
+import { selectProducts } from '../../store/selectors/products';
 
 export const Sorting = () => {
-  const { currentSortType } = useAppSelector((state) => state.productsReducer);
+  const { currentSortType } = useAppSelector(selectProducts);
   const dispatch = useAppDispatch();
   const { changeSortType } = productsActions;
 

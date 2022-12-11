@@ -36,7 +36,7 @@ export const getProductsByDescPrice = (products: TProduct[]) => {
   return products.sort((a, b) => b.price - a.price);
 };
 
-export const getFilteringProducts = (products: TProduct[], type: string) => {
+export const getSortingProducts = (products: TProduct[], type: string) => {
   if (type === 'ascName') {
     return getProductsByAscName(products);
   }

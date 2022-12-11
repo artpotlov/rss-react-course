@@ -1,18 +1,13 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { productReducer } from './slices/ProductSlice';
-import { productsReducer } from './slices/ProductsSlice';
+import { configureStore } from '@reduxjs/toolkit';
+import { productReducer } from './slices/singleProduct/singleProduct.slice';
+import { productsReducer } from './slices/products/products.slice';
 
-const rootReducer = combineReducers({
-  productReducer,
-  productsReducer,
+export const store = configureStore({
+  reducer: {
+    products: productsReducer,
+    singleProduct: productReducer,
+  },
 });
 
-export const setupStore = () => {
-  return configureStore({
-    reducer: rootReducer,
-  });
-};
-
-export type TRootState = ReturnType<typeof rootReducer>;
-export type TAppStore = ReturnType<typeof setupStore>;
-export type TAppDispatch = TAppStore['dispatch'];
+export type TRootState = ReturnType<typeof store.getState>;
+export type TAppDispatch = typeof store.dispatch;

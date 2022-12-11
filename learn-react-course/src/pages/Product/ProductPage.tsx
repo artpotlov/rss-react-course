@@ -5,10 +5,11 @@ import { Product } from '../../components/Product';
 import { routes } from '../../router/routes';
 import { ProductPageContainer, ProductPageLink } from './ProductPage.styled';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getSingleProduct } from '../../store/thunks/Thunks';
+import { getSingleProduct } from '../../store/thunks/thunks';
+import { selectSingleProduct } from '../../store/selectors/singleProduct';
 
 export const ProductPage = () => {
-  const { product, isLoading } = useAppSelector((state) => state.productReducer);
+  const { product, isLoading } = useAppSelector(selectSingleProduct);
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
