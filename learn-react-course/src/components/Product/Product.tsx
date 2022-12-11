@@ -1,5 +1,5 @@
 import React from 'react';
-import { TProduct } from '../../types/types';
+import {TProduct} from '../../types/types';
 import {
   ProductCategory,
   ProductDescription,
@@ -9,10 +9,12 @@ import {
   ProductWrapper,
 } from './Product.styled';
 
-export const Product = ({ title, price, category, description, images }: Omit<TProduct, 'id'>) => {
+type TProps = Omit<TProduct, 'id'>
+
+export const Product = ({title, price, category, description, images}: TProps) => {
   return (
     <ProductWrapper>
-      <img style={{ maxWidth: '400px' }} src={images[0]} alt="title" />
+      <img style={{maxWidth: '400px'}} src={images[0]} alt="title"/>
       <ProductInfo>
         <ProductPrice>$ {price}</ProductPrice>
         <ProductTitle>{title}</ProductTitle>

@@ -1,9 +1,9 @@
-import React, { useEffect, useReducer, useState } from 'react';
-import { productReducer } from './reducers/product-reducer';
-import { ProductContext } from './product-context';
-import { getAllProducts, getLimitProducts } from '../../utils/api';
-import { pageReducer } from './reducers/page-reducer';
-import { TOTAL_PAGES } from '../../shared/constants';
+import React, {useEffect, useReducer, useState} from 'react';
+import {productReducer} from './reducers/product-reducer';
+import {ProductContext} from './product-context';
+import {getAllProducts, getLimitProducts} from '../../utils/api';
+import {pageReducer} from './reducers/page-reducer';
+import {TOTAL_PAGES} from '../../shared/constants';
 import {
   getProductsByAscName,
   getProductsByAscPrice,
@@ -15,14 +15,14 @@ type TProps = {
   children: React.ReactNode;
 };
 
-export const ProductsProvider = ({ children }: TProps) => {
-  const [productState, productDispatch] = useReducer(productReducer, { loading: true });
-  const [pageState, pageDispatch] = useReducer(pageReducer, { currentPage: 1 });
+export const ProductsProvider = ({children}: TProps) => {
+  const [productState, productDispatch] = useReducer(productReducer, {loading: true});
+  const [pageState, pageDispatch] = useReducer(pageReducer, {currentPage: 1});
   const [searchState, setSearchState] = useState(false);
   const [sortState, setSortState] = useState<string>('ascName');
 
   const onHandleKeyUpEnter = async (searchVal: string) => {
-    productDispatch({ type: 'LOADING' });
+    productDispatch({type: 'LOADING'});
     setSearchState(true);
 
     if (searchVal.length === 0) {
@@ -33,12 +33,12 @@ export const ProductsProvider = ({ children }: TProps) => {
     const response = await getAllProducts();
 
     if (!response) {
-      productDispatch({ type: 'ERROR', payload: { error: '⚡ Bad request' } });
+      productDispatch({type: 'ERROR', payload: {error: '⚡ Bad request'}});
       return;
     }
 
     if ('error' in response.data) {
-      productDispatch({ type: 'ERROR', payload: { error: response.data.message } });
+      productDispatch({type: 'ERROR', payload: {error: response.data.message}});
       return;
     }
 
@@ -51,21 +51,21 @@ export const ProductsProvider = ({ children }: TProps) => {
     if (filteringData.length === 0) {
       productDispatch({
         type: 'ERROR',
-        payload: { error: '☹️ Products are not found...' },
+        payload: {error: '☹️ Products are not found...'},
       });
       return;
     }
 
-    productDispatch({ type: 'LOADED', payload: { products: filteringData } });
+    productDispatch({type: 'LOADED', payload: {products: filteringData}});
   };
 
   const onHandleTogglePage = (type: 'next' | 'prev') => {
     if (type === 'next') {
-      pageDispatch({ type: 'NEXT_PAGE' });
+      pageDispatch({type: 'NEXT_PAGE'});
     }
 
     if (type === 'prev') {
-      pageDispatch({ type: 'PREV_PAGE' });
+      pageDispatch({type: 'PREV_PAGE'});
     }
   };
 
@@ -77,25 +77,25 @@ export const ProductsProvider = ({ children }: TProps) => {
     const getRequest = async () => {
       if (searchState) return;
 
-      productDispatch({ type: 'LOADING' });
+      productDispatch({type: 'LOADING'});
 
       const offsetProducts = (pageState.currentPage - 1) * 20;
       const response = await getLimitProducts(offsetProducts);
 
       if (!response) {
-        productDispatch({ type: 'ERROR', payload: { error: 'Bad request' } });
+        productDispatch({type: 'ERROR', payload: {error: 'Bad request'}});
         return;
       }
 
       if ('error' in response.data) {
-        productDispatch({ type: 'ERROR', payload: { error: response.data.message } });
+        productDispatch({type: 'ERROR', payload: {error: response.data.message}});
         return;
       }
 
-      productDispatch({ type: 'LOADED', payload: { products: response.data } });
+      productDispatch({type: 'LOADED', payload: {products: response.data}});
     };
 
-    getRequest().then();
+    getRequest();
   }, [pageState, searchState]);
 
   useEffect(() => {
@@ -108,7 +108,7 @@ export const ProductsProvider = ({ children }: TProps) => {
 
       productDispatch({
         type: 'SUCCESS',
-        payload: { products: filteringData },
+        payload: {products: filteringData},
       });
     }
 
@@ -117,7 +117,7 @@ export const ProductsProvider = ({ children }: TProps) => {
 
       productDispatch({
         type: 'SUCCESS',
-        payload: { products: filteringData },
+        payload: {products: filteringData},
       });
     }
 
@@ -126,7 +126,7 @@ export const ProductsProvider = ({ children }: TProps) => {
 
       productDispatch({
         type: 'SUCCESS',
-        payload: { products: filteringData },
+        payload: {products: filteringData},
       });
     }
 
@@ -135,7 +135,7 @@ export const ProductsProvider = ({ children }: TProps) => {
 
       productDispatch({
         type: 'SUCCESS',
-        payload: { products: filteringData },
+        payload: {products: filteringData},
       });
     }
   }, [sortState, productState.products]);
