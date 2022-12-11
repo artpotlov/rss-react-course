@@ -40,22 +40,4 @@ describe('API tests:', () => {
     const response = await getProductByID(-1);
     expect(response?.data).toHaveProperty('error', 'Not Found');
   });
-
-  it('when getLimitProducts returned nothing should be called an exception', async () => {
-    axiosMock.get.mockRejectedValueOnce(null);
-    const response = await getLimitProducts();
-    expect(response).toBeNull();
-  });
-
-  it('when getAllProducts returned nothing should be called an exception', async () => {
-    axiosMock.get.mockRejectedValueOnce(null);
-    const response = await getAllProducts();
-    expect(response).toBeNull();
-  });
-
-  it('when getProductByID returned nothing should be called an exception', async () => {
-    axiosMock.get.mockRejectedValueOnce(null);
-    const response = await getProductByID(1);
-    expect(response).toBeNull();
-  });
 });
