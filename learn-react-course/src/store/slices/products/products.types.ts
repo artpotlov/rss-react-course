@@ -6,6 +6,5 @@ export type TProductsState = {
   errorMessage: string | null;
   currentPage: number;
   totalPages: number;
-  currentSortType: string;
   isSearching: boolean;
 };

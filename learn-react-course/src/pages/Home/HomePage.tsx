@@ -9,7 +9,7 @@ type TProps = {
   title?: string;
 };
 
-export const HomePage = ({ dataTestId = 'home-page', title = 'Home Page' }: TProps) => {
+const HomePage = ({ dataTestId = 'home-page', title = 'Home Page' }: TProps) => {
   return (
     <section data-testid={dataTestId}>
       <HomePageHeader>
@@ -23,3 +23,5 @@ export const HomePage = ({ dataTestId = 'home-page', title = 'Home Page' }: TPro
     </section>
   );
 };
+
+export default HomePage;

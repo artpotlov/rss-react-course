@@ -10,7 +10,7 @@ type TProps = {
 export const Card = ({ title, category, price, images, dataTestId = 'card', onClick }: TProps) => {
   return (
     <CardWrapper data-testid={dataTestId} onClick={onClick}>
-      <CardImage src={images && images[0]} alt={title} />
+      <CardImage src={images && images[0]} alt={title} loading="lazy" />
       <CardTitle>{title}</CardTitle>
       <CardCategory>{category?.name}</CardCategory>
       <CardPrice>$ {price}</CardPrice>

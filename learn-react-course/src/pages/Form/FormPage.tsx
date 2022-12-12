@@ -5,7 +5,7 @@ type TProps = {
   dataTestId?: string;
 };
 
-export const FormPage = ({ dataTestId = 'form-page' }: TProps) => {
+const FormPage = ({ dataTestId = 'form-page' }: TProps) => {
   return (
     <>
       <h1 data-testid={dataTestId}>Form Page</h1>
@@ -13,3 +13,5 @@ export const FormPage = ({ dataTestId = 'form-page' }: TProps) => {
     </>
   );
 };
+
+export default FormPage;

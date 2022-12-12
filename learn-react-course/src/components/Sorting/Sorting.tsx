@@ -2,13 +2,13 @@ import React from 'react';
 import { SortingSelect, SortingWrapper } from './Sorting.styled';
 import { SORTING_VALS } from '../../shared/constants';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { productsActions } from '../../store/slices/products/products.slice';
-import { selectProducts } from '../../store/selectors/products';
+import { selectSortType } from '../../store/selectors/filter';
+import { filterActions } from '../../store/slices/filter/filter.slice';
 
 export const Sorting = () => {
-  const { currentSortType } = useAppSelector(selectProducts);
+  const currentSortType = useAppSelector(selectSortType);
   const dispatch = useAppDispatch();
-  const { changeSortType } = productsActions;
+  const { changeSortType } = filterActions;
 
   const onHandleClickOption = (target: EventTarget) => {
     if (!(target instanceof HTMLSelectElement)) {

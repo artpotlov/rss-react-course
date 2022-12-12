@@ -2,11 +2,12 @@ import React from 'react';
 import { routes } from './routes';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import { App } from '../components/App';
-import { ErrorPage } from '../pages/Error';
-import { AboutUsPage } from '../pages/AboutUs';
-import { HomePage } from '../pages/Home';
-import { FormPage } from '../pages/Form';
-import { ProductPage } from '../pages/Product';
+
+const ErrorPage = React.lazy(() => import('../pages/Error'));
+const HomePage = React.lazy(() => import('../pages/Home'));
+const AboutUsPage = React.lazy(() => import('../pages/AboutUs'));
+const FormPage = React.lazy(() => import('../pages/Form'));
+const ProductPage = React.lazy(() => import('../pages/Product'));
 
 export const routerConfig: RouteObject[] = [
   {
@@ -38,4 +39,4 @@ export const routerConfig: RouteObject[] = [
   },
 ];
 
-export const router = createBrowserRouter(routerConfig);
+export const router = createBrowserRouter(routerConfig, { basename: '/' });

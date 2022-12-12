@@ -1,8 +1,9 @@
-import { createSlice, isAnyOf, PayloadAction } from '@reduxjs/toolkit';
-import { getSortingProducts } from '../../../utils/filters';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { TOTAL_PAGES } from '../../../shared/constants';
 import { getProductsByPage, getProductsBySearchVal } from '../../thunks/thunks';
 import { TProductsState } from './products.types';
+import { filterActions } from '../filter/filter.slice';
+import { getSortingProducts } from '../../../utils/filters';
 
 export const initialState: TProductsState = {
   products: [],
@@ -10,7 +11,6 @@ export const initialState: TProductsState = {
   errorMessage: '',
   currentPage: 1,
   totalPages: TOTAL_PAGES,
-  currentSortType: 'ascName',
   isSearching: false,
 };
 
@@ -18,10 +18,6 @@ const productsSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    changeSortType: (state, action: PayloadAction<string>) => {
-      state.currentSortType = action.payload;
-      state.products = getSortingProducts(state.products, state.currentSortType);
-    },
     setNextPage: (state) => {
       state.currentPage += 1;
     },
@@ -32,19 +28,22 @@ const productsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getProductsByPage.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.isSearching = false;
-        state.products = getSortingProducts(action.payload, state.currentSortType);
+        state.products = action.payload;
       })
       .addCase(getProductsBySearchVal.fulfilled, (state, action) => {
-        if (!action.payload.length) {
-          state.errorMessage = 'Nothing found';
-        } else {
-          state.products = getSortingProducts(action.payload, state.currentSortType);
-        }
-        state.isLoading = false;
+        state.products = action.payload;
         state.isSearching = true;
       })
+      .addCase(filterActions.changeSortType, (state, action) => {
+        state.products = getSortingProducts(state.products, action.payload);
+      })
+      .addMatcher(
+        isAnyOf(getProductsByPage.fulfilled, getProductsBySearchVal.fulfilled),
+        (state) => {
+          state.isLoading = false;
+        }
+      )
       .addMatcher(isAnyOf(getProductsByPage.pending, getProductsBySearchVal.pending), (state) => {
         state.isLoading = true;
         state.products = [];

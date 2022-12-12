@@ -7,7 +7,7 @@ type TProps = {
   dataTestId?: string;
 };
 
-export const ErrorPage = ({ dataTestId = 'error-page' }: TProps) => {
+const ErrorPage = ({ dataTestId = 'error-page' }: TProps) => {
   return (
     <ErrorPageContainer data-testid={dataTestId}>
       <div>
@@ -18,3 +18,5 @@ export const ErrorPage = ({ dataTestId = 'error-page' }: TProps) => {
     </ErrorPageContainer>
   );
 };
+
+export default ErrorPage;

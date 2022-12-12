@@ -4,7 +4,7 @@ type TProps = {
   dataTestId?: string;
 };
 
-export const AboutUsPage = ({ dataTestId = 'about-us-page' }: TProps) => {
+const AboutUsPage = ({ dataTestId = 'about-us-page' }: TProps) => {
   return (
     <section data-testid={dataTestId}>
       <h1>About us page</h1>
@@ -12,3 +12,5 @@ export const AboutUsPage = ({ dataTestId = 'about-us-page' }: TProps) => {
     </section>
   );
 };
+
+export default AboutUsPage;

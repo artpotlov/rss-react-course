@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getSingleProduct } from '../../store/thunks/thunks';
 import { selectSingleProduct } from '../../store/selectors/singleProduct';
 
-export const ProductPage = () => {
+const ProductPage = () => {
   const { product, isLoading } = useAppSelector(selectSingleProduct);
   const { id } = useParams();
   const dispatch = useAppDispatch();
@@ -40,3 +40,5 @@ export const ProductPage = () => {
     </ProductPageContainer>
   );
 };
+
+export default ProductPage;
